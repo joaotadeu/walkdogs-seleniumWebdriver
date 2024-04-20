@@ -1,5 +1,6 @@
 package br.com.joaotadeu.steps;
 
+import io.cucumber.java.After;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
@@ -52,6 +53,7 @@ public class Cadastro_parceiro_walkdog_steps {
     @Quando("escolho atividade extra")
     public void escolho_atividade_extra(io.cucumber.datatable.DataTable dataTable) {
 
+
     }
     @Quando("faço upload do documento de verificação do parceiro")
     public void faço_upload_do_documento_de_verificação_do_parceiro(io.cucumber.datatable.DataTable dataTable) {
@@ -59,7 +61,11 @@ public class Cadastro_parceiro_walkdog_steps {
     }
     @Então("devo ver a mensagem de cadastro com sucesso")
     public void devo_ver_a_mensagem_de_cadastro_com_sucesso() {
-        navegador.quit();
 
+    }
+
+    @After
+    public void Hooks(){
+        navegador.quit();
     }
 }
