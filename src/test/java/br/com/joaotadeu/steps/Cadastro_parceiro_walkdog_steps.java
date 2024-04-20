@@ -26,6 +26,7 @@ public class Cadastro_parceiro_walkdog_steps {
     public void preencho_os_dados_pessoais_do_parceiro() {
         navegador.findElement(By.cssSelector(".content > main:nth-child(1) > a:nth-child(4) > span:nth-child(1)")).click();
 
+        
     }
     @Quando("escolho atividade extra")
     public void escolho_atividade_extra() {
