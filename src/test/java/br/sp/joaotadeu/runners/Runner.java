@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
         features = "src/test/java/br/com/joaotadeu/features/Cadastro_parceiro_walkdog.feature",
         glue = "br.com.joaotadeu.steps",
         plugin = {"pretty", "html: target/report-html", "json: target/report.json"},
-        tags = "cadastro_com_sucesso"
+        tags = "@cadastro_com_sucesso"
 )
 public class Runner {
 
