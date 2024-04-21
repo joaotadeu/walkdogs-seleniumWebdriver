@@ -34,9 +34,9 @@ public class Cadastro_parceiro_walkdog_steps {
     public void preencho_os_dados_pessoais_do_parceiro(io.cucumber.datatable.DataTable dataTable) {
         List<Map<String, String>> dadosParceiro = dataTable.asMaps(String.class, String.class);
 
-        WebElement nomeInput = navegador.findElement(By.name("name")); // Supondo que o ID do campo de nome seja "name"
-        WebElement emailInput = navegador.findElement(By.name("email")); // Supondo que o ID do campo de email seja "email"
-        WebElement cpfInput = navegador.findElement(By.name("cpf")); // Supondo que o ID do campos de CPF seja "CPF"
+        WebElement nomeInput = navegador.findElement(By.name("name"));
+        WebElement emailInput = navegador.findElement(By.name("email"));
+        WebElement cpfInput = navegador.findElement(By.name("cpf"));
         WebElement cepInput = navegador.findElement(By.name("cep"));
         WebElement numeroInput = navegador.findElement(By.name("addressNumber"));
         WebElement complementoInput = navegador.findElement(By.name("addressDetails"));
@@ -46,12 +46,34 @@ public class Cadastro_parceiro_walkdog_steps {
         emailInput.sendKeys(dadosParceiro.get(0).get("E-mail"));
         cpfInput.sendKeys(dadosParceiro.get(0).get("CPF"));
         cepInput.sendKeys(dadosParceiro.get(0).get("CEP"));
-        navegador.findElement(By.cssSelector("#page-walker > form:nth-child(2) > fieldset:nth-child(4) > div:nth-child(2) > div:nth-child(2) > input:nth-child(1)")).click();
+        navegador.findElement(By.cssSelector("input[type=\"button\"]")).click();
         numeroInput.sendKeys(dadosParceiro.get(0).get("Numero"));
         complementoInput.sendKeys(dadosParceiro.get(0).get("Complemento"));
     }
     @Quando("escolho atividade extra")
     public void escolho_atividade_extra(io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> atividadesExtras = dataTable.asMaps(String.class, String.class);
+
+        for (Map<String, String> atividade : atividadesExtras) {
+            // Obtendo o tipo de atividade extra (cuidar ou adestrar) da DataTable
+            String tipoAtividade = atividade.get("Atividades Extras").toLowerCase();
+
+            // Verificando o tipo de atividade e realizando a seleção correspondente
+            switch (tipoAtividade) {
+                case "cuidar":
+                    // Lógica para selecionar a atividade "cuidar"
+                    navegador.findElement(By.cssSelector(".walker-service > li:nth-child(1) > span:nth-child(2)")).click();
+                    break;
+                case "adestrar":
+                    // Lógica para selecionar a atividade "adestrar"
+                    navegador.findElement(By.cssSelector(".walker-service > li:nth-child(2) > span:nth-child(2)")).click();
+                    break;
+                default:
+                    // Tratamento para tipos de atividade inválidos
+                    System.out.println("Tipo de atividade extra inválido: " + tipoAtividade);
+                    break;
+            }
+        }
 
 
     }
@@ -66,6 +88,6 @@ public class Cadastro_parceiro_walkdog_steps {
 
     @After
     public void Hooks(){
-        navegador.quit();
+        //navegador.quit();
     }
 }

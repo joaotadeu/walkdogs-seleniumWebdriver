@@ -12,7 +12,7 @@
       | João T. S Pereira | teste@gmail.com | 55224563957 | 01310930 | 2100   | Avenida     |
     E escolho atividade extra
       | Atividades Extras |
-      | Cuidar            |
+      | adestrar          |
     E faço upload do documento de verificação do parceiro
         | Caminho Documento |
         | ????????????????? |
