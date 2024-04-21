@@ -14,6 +14,6 @@
       | Atividades Extras |
       | adestrar          |
     E faço upload do documento de verificação do parceiro
-        | Caminho Documento |
-        | ????????????????? |
+      | Caminho Documento                                                                        |
+      | /Users/joaotadeu/Documents/Workspace/Cucumber/web/features/support/images/CNH-falsa.jpeg |
     Então devo ver a mensagem de cadastro com sucesso

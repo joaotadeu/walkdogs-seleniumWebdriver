@@ -79,6 +79,16 @@ public class Cadastro_parceiro_walkdog_steps {
     }
     @Quando("faço upload do documento de verificação do parceiro")
     public void faço_upload_do_documento_de_verificação_do_parceiro(io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> dadosDocumento = dataTable.asMaps(String.class, String.class);
+
+        // Obter o caminho do arquivo da DataTable
+        String caminhoDoArquivo = dadosDocumento.get(0).get("Caminho Documento");
+
+        // Localizar o elemento de upload na página
+        WebElement fileUploadElement = navegador.findElement(By.cssSelector(".dropzone > p:nth-child(2)"));
+
+        // Enviar o caminho do arquivo para o elemento de upload
+        fileUploadElement.sendKeys(caminhoDoArquivo);
 
     }
     @Então("devo ver a mensagem de cadastro com sucesso")
@@ -88,6 +98,6 @@ public class Cadastro_parceiro_walkdog_steps {
 
     @After
     public void Hooks(){
-        //navegador.quit();
+        navegador.quit();
     }
 }
