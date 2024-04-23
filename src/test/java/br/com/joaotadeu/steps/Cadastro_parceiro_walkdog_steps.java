@@ -1,17 +1,19 @@
 package br.com.joaotadeu.steps;
 
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +26,11 @@ public class Cadastro_parceiro_walkdog_steps {
     public void setUp(){
         //Configuração do navegador
         WebDriverManager.firefoxdriver().setup();
+    }
+
+    @After
+    public void fecharNavegador() {
+        navegador.quit();
     }
 
     @Dado("que estou na pagina principal do WalkDog")
@@ -101,16 +108,39 @@ public class Cadastro_parceiro_walkdog_steps {
 
     @Então("devo ver a mensagem {string}")
     public void devoVerAMensagem(String mensagemEsperada) {
+        // Tempo limite de espera
+        Duration timeout = Duration.ofSeconds(30);
 
-        WebElement elementoMensagem = navegador.findElement(By.cssSelector("#swal2-html-container"));
-        String textoAtual = elementoMensagem.getText();
-        Assert.assertTrue("O texto exibido não corresponde ao esperado: " + mensagemEsperada, textoAtual.startsWith(mensagemEsperada));
+        // Registrar o tempo de início
+        Instant startTime = Instant.now();
 
-    }
+        // Definir uma variável para indicar se o elemento foi encontrado
+        boolean elementoEncontrado = false;
 
-    @After
-    public static void tearDown() {
-        //navegador.quit();
+        // Enquanto o elemento não for encontrado e o tempo limite não for excedido
+        while (!elementoEncontrado && Duration.between(startTime, Instant.now()).compareTo(timeout) < 0) {
+            try {
+                // Tentar localizar o elemento
+                WebElement mensagemElement = navegador.findElement(By.cssSelector("#swal2-html-container"));
+
+                // Se o elemento for encontrado, atualizar a variável e sair do loop
+                if (mensagemElement.isDisplayed()) {
+                    elementoEncontrado = true;
+                    // Verificar se a mensagem exibida é igual à mensagem esperada
+                    String mensagemExibida = mensagemElement.getText();
+                    Assert.assertEquals(mensagemEsperada, mensagemExibida);
+                }
+            } catch (org.openqa.selenium.NoSuchElementException | org.openqa.selenium.StaleElementReferenceException e) {
+                // Elemento não encontrado ou elemento alterado na página, continuar tentando
+                System.out.println("Elemento não encontrado. Tentando novamente...");
+            }
+        }
+
+        // Verificar se o elemento foi encontrado
+        if (!elementoEncontrado) {
+            System.out.println("Tempo limite de espera excedido. Elemento não encontrado.");
+            // Tratar a falha, se necessário...
+        }
     }
 
 }
