@@ -85,7 +85,10 @@ public class Cadastro_parceiro_walkdog_steps {
         String caminhoDoArquivo = dadosDocumento.get(0).get("Caminho Documento");
 
         // Localizar o elemento de upload na página
-        WebElement fileUploadElement = navegador.findElement(By.cssSelector(".dropzone > p:nth-child(2)"));
+        WebElement fileUploadElement = navegador.findElement(By.cssSelector(""));
+
+        // Tornar o elemento visível usando JavaScript
+        //((JavascriptExecutor) navegador).executeScript("arguments[0].style.display = 'block';", fileUploadElement);
 
         // Enviar o caminho do arquivo para o elemento de upload
         fileUploadElement.sendKeys(caminhoDoArquivo);
@@ -97,7 +100,7 @@ public class Cadastro_parceiro_walkdog_steps {
     }
 
     @After
-    public void Hooks(){
+    public void fecharNavegador(){
         navegador.quit();
     }
 }
