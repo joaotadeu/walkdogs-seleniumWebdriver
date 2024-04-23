@@ -20,7 +20,6 @@ public class Cadastro_parceiro_walkdog_steps {
 
     @Dado("que estou na pagina principal do WalkDog")
     public void que_estou_na_pagina_principal_do_walk_dog() {
-
         //Configuração do navegador
         WebDriverManager.firefoxdriver().setup();
 
