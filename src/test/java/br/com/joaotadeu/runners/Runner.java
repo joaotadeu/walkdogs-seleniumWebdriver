@@ -1,4 +1,4 @@
-package br.sp.joaotadeu.runners;
+package br.com.joaotadeu.runners;
 
 import org.junit.runner.RunWith;
 

@@ -74,7 +74,6 @@ public class Cadastro_parceiro_walkdog_steps {
             }
         }
 
-
     }
     @Quando("faço upload do documento de verificação do parceiro")
     public void faço_upload_do_documento_de_verificação_do_parceiro(io.cucumber.datatable.DataTable dataTable) {
@@ -88,6 +87,8 @@ public class Cadastro_parceiro_walkdog_steps {
 
         // Enviar o caminho do arquivo para o elemento de upload
         fileInput.sendKeys(caminhoDoArquivo);
+
+        navegador.findElement(By.cssSelector(".button-register")).click();
 
     }
     @Então("devo ver a mensagem de cadastro com sucesso")
