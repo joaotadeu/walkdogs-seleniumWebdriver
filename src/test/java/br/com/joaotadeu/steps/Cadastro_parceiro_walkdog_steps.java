@@ -1,6 +1,7 @@
 package br.com.joaotadeu.steps;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
@@ -19,12 +20,14 @@ public class Cadastro_parceiro_walkdog_steps {
     //Transforma a Variável e uma Variável global
     private static final WebDriver navegador = new FirefoxDriver();
 
-    @Dado("que estou na pagina principal do WalkDog")
-    public void que_estou_na_pagina_principal_do_walk_dog() {
+    @Before
+    public void setUp(){
         //Configuração do navegador
         WebDriverManager.firefoxdriver().setup();
+    }
 
-        //Abrindo navegador
+    @Dado("que estou na pagina principal do WalkDog")
+    public void que_estou_na_pagina_principal_do_walk_dog() {
         navegador.get("https://walkdog.vercel.app/");
         navegador.findElement(By.cssSelector(".content > main:nth-child(1) > a:nth-child(4) > span:nth-child(1)")).click();
 
@@ -55,12 +58,12 @@ public class Cadastro_parceiro_walkdog_steps {
     public void escolho_atividade_extra(io.cucumber.datatable.DataTable dataTable) {
         List<Map<String, String>> atividadesExtras = dataTable.asMaps(String.class, String.class);
 
-        for (Map<String, String> atividade : atividadesExtras) {
-            // Obtendo o tipo de atividade extra (cuidar ou adestrar) da DataTable
-            String tipoAtividade = atividade.get("Atividades Extras").toLowerCase();
+        // Verificar se há atividades extras especificadas
+        if (!atividadesExtras.isEmpty()) {
+            String atividadeExtra = atividadesExtras.get(0).get("Atividade Extra");
 
             // Verificando o tipo de atividade e realizando a seleção correspondente
-            switch (tipoAtividade) {
+            switch (atividadeExtra.toLowerCase()) {
                 case "cuidar":
                     // Lógica para selecionar a atividade "cuidar"
                     navegador.findElement(By.cssSelector(".walker-service > li:nth-child(1) > span:nth-child(2)")).click();
@@ -71,11 +74,12 @@ public class Cadastro_parceiro_walkdog_steps {
                     break;
                 default:
                     // Tratamento para tipos de atividade inválidos
-                    System.out.println("Tipo de atividade extra inválido: " + tipoAtividade);
+                    System.out.println("Tipo de atividade extra inválido: " + atividadeExtra);
                     break;
             }
+        } else {
+            System.out.println("Nenhuma atividade extra especificada.");
         }
-
     }
 
     @Quando("faço upload do documento de verificação do parceiro")
@@ -105,8 +109,8 @@ public class Cadastro_parceiro_walkdog_steps {
     }
 
     @After
-    public static void fecharNavegador(){
-        navegador.quit();
+    public static void tearDown() {
+        //navegador.quit();
     }
 
 }
