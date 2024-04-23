@@ -97,6 +97,6 @@ public class Cadastro_parceiro_walkdog_steps {
 
     @After
     public static void fecharNavegador(){
-        navegador.quit();
+        //navegador.quit();
     }
 }
