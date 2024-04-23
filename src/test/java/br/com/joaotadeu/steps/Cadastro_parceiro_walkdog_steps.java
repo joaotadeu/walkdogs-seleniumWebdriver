@@ -5,6 +5,7 @@ import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class Cadastro_parceiro_walkdog_steps {
 
     //Transforma a Variável e uma Variável global
-    private final WebDriver navegador = new FirefoxDriver();
+    private static final WebDriver navegador = new FirefoxDriver();
 
     @Dado("que estou na pagina principal do WalkDog")
     public void que_estou_na_pagina_principal_do_walk_dog() {
@@ -84,13 +85,10 @@ public class Cadastro_parceiro_walkdog_steps {
         String caminhoDoArquivo = dadosDocumento.get(0).get("Caminho Documento");
 
         // Localizar o elemento de upload na página
-        WebElement fileUploadElement = navegador.findElement(By.cssSelector(""));
-
-        // Tornar o elemento visível usando JavaScript
-        //((JavascriptExecutor) navegador).executeScript("arguments[0].style.display = 'block';", fileUploadElement);
+        WebElement fileInput = navegador.findElement(By.cssSelector("input[type='file']"));
 
         // Enviar o caminho do arquivo para o elemento de upload
-        fileUploadElement.sendKeys(caminhoDoArquivo);
+        fileInput.sendKeys(caminhoDoArquivo);
 
     }
     @Então("devo ver a mensagem de cadastro com sucesso")
@@ -99,7 +97,7 @@ public class Cadastro_parceiro_walkdog_steps {
     }
 
     @After
-    public void fecharNavegador(){
+    public static void fecharNavegador(){
         navegador.quit();
     }
 }
