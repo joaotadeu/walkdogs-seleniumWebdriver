@@ -5,6 +5,7 @@ import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,6 +50,7 @@ public class Cadastro_parceiro_walkdog_steps {
         numeroInput.sendKeys(dadosParceiro.get(0).get("Numero"));
         complementoInput.sendKeys(dadosParceiro.get(0).get("Complemento"));
     }
+
     @Quando("escolho atividade extra")
     public void escolho_atividade_extra(io.cucumber.datatable.DataTable dataTable) {
         List<Map<String, String>> atividadesExtras = dataTable.asMaps(String.class, String.class);
@@ -75,6 +77,7 @@ public class Cadastro_parceiro_walkdog_steps {
         }
 
     }
+
     @Quando("faço upload do documento de verificação do parceiro")
     public void faço_upload_do_documento_de_verificação_do_parceiro(io.cucumber.datatable.DataTable dataTable) {
         List<Map<String, String>> dadosDocumento = dataTable.asMaps(String.class, String.class);
@@ -91,13 +94,19 @@ public class Cadastro_parceiro_walkdog_steps {
         navegador.findElement(By.cssSelector(".button-register")).click();
 
     }
-    @Então("devo ver a mensagem de cadastro com sucesso")
-    public void devo_ver_a_mensagem_de_cadastro_com_sucesso() {
+
+    @Então("devo ver a mensagem {string}")
+    public void devoVerAMensagem(String mensagemEsperada) {
+
+        WebElement elementoMensagem = navegador.findElement(By.cssSelector("#swal2-html-container"));
+        String textoAtual = elementoMensagem.getText();
+        Assert.assertTrue("O texto exibido não corresponde ao esperado: " + mensagemEsperada, textoAtual.startsWith(mensagemEsperada));
 
     }
 
     @After
     public static void fecharNavegador(){
-        navegador.quit();
+        //navegador.quit();
     }
+
 }
