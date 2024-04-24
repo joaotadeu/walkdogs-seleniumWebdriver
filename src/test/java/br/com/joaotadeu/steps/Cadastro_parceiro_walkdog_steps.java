@@ -4,17 +4,21 @@ import io.cucumber.java.After;
 
 import io.cucumber.java.Before;
 
+import io.cucumber.java.Scenario;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +37,13 @@ public class Cadastro_parceiro_walkdog_steps {
 
     }
 
-    @After
+    @After(order = 1)
+    public void tirarPrint(Scenario cenario) throws IOException {
+      File file =  ((TakesScreenshot)navegador).getScreenshotAs(OutputType.FILE);
+      FileUtils.copyFile(file, new File("targer/screenshot/"+cenario.getId()+".jpg"));
+    }
+
+    @After(order = 0)
     public void fecharNavegador(){
         navegador.quit();
         System.out.println("Finalizando Teste...");
