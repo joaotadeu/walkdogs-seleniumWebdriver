@@ -12,9 +12,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -29,11 +30,13 @@ public class Cadastro_parceiro_walkdog_steps {
         navegador = new FirefoxDriver();
         WebDriverManager.firefoxdriver().setup();
         System.out.println("Iniciando Teste...");
+
     }
 
     @After
     public void fecharNavegador(){
         navegador.quit();
+        System.out.println("Finalizando Teste...");
 
     }
 
@@ -63,6 +66,7 @@ public class Cadastro_parceiro_walkdog_steps {
         navegador.findElement(By.cssSelector("input[type=\"button\"]")).click();
         numeroInput.sendKeys(dadosParceiro.get(0).get("Numero"));
         complementoInput.sendKeys(dadosParceiro.get(0).get("Complemento"));
+
     }
 
     @Quando("escolho atividade extra")
@@ -91,6 +95,7 @@ public class Cadastro_parceiro_walkdog_steps {
         } else {
             System.out.println("Nenhuma atividade extra especificada.");
         }
+
     }
 
     @Quando("faço upload do documento de verificação do parceiro")
@@ -112,38 +117,29 @@ public class Cadastro_parceiro_walkdog_steps {
 
     @Então("devo ver a mensagem {string}")
     public void devoVerAMensagem(String mensagemEsperada) {
-        // Tempo limite de espera
-        Duration timeout = Duration.ofSeconds(30);
+        // Tempo limite de espera em segundos
+        int tempoEsperaEmSegundos = 2;
 
-        // Registrar o tempo de início
-        Instant startTime = Instant.now();
+        // Converte o tempo de espera em segundos para um objeto Duration
+        Duration tempoDeEspera = Duration.ofSeconds(tempoEsperaEmSegundos);
 
-        // Definir uma variável para indicar se o elemento foi encontrado
-        boolean elementoEncontrado = false;
+        // Aguardar até que o elemento seja visível
+        WebDriverWait wait = new WebDriverWait(navegador, tempoDeEspera);
+        WebElement mensagemElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#swal2-html-container")));
 
-        // Enquanto o elemento não for encontrado e o tempo limite não for excedido
-        while (!elementoEncontrado && Duration.between(startTime, Instant.now()).compareTo(timeout) < 0) {
-            try {
-                // Tentar localizar o elemento
-                WebElement mensagemElement = navegador.findElement(By.cssSelector("#swal2-html-container"));
+        // Verificar se a mensagem exibida é igual à mensagem esperada
+        String mensagemExibida = mensagemElement.getText();
+        Assert.assertEquals(mensagemEsperada, mensagemExibida);
 
-                // Se o elemento for encontrado, atualizar a variável e sair do loop
-                if (mensagemElement.isDisplayed()) {
-                    elementoEncontrado = true;
-                    // Verificar se a mensagem exibida é igual à mensagem esperada
-                    String mensagemExibida = mensagemElement.getText();
-                    Assert.assertEquals(mensagemEsperada, mensagemExibida);
-                }
-            } catch (org.openqa.selenium.NoSuchElementException | org.openqa.selenium.StaleElementReferenceException e) {
-                // Elemento não encontrado ou elemento alterado na página, continuar tentando
-                System.out.println("Elemento não encontrado. Tentando novamente...");
-            }
-        }
+    }
 
-        // Verificar se o elemento foi encontrado
-        if (!elementoEncontrado) {
-            System.out.println("Tempo limite de espera excedido. Elemento não encontrado.");
-            // Tratar a falha, se necessário...
-        }
+    @Quando("tento cadastrar um parceiro sem preencher os campos obrigatórios")
+    public void tentoCadastrarUmParceiroSemPreencherOsCamposObrigatorios() {
+        System.out.println("Passei por aqui");
+    }
+
+    @Então("devo ver uma mensagem de erro informando que os campos obrigatórios não foram preenchidos")
+    public void devoVerUmaMensagemDeErroInformandoQueOsCamposObrigatoriosNaoForamPreenchidos() {
+        System.out.println("Passei por aqui");
     }
 }
