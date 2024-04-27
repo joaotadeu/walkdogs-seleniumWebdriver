@@ -41,7 +41,7 @@ public class Cadastro_parceiro_walkdog_steps {
     @After(order = 1)
     public void tirarPrint(Scenario cenario) throws IOException {
       File file =  ((TakesScreenshot)navegador).getScreenshotAs(OutputType.FILE);
-      FileUtils.copyFile(file, new File("targer/screenshot/"+cenario.getId()+".jpg"));
+      FileUtils.copyFile(file, new File("evidencias/screenshot/"+cenario.getId()+".jpg"));
     }
 
     @After(order = 0)

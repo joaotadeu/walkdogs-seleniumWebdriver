@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
         features = "src/test/java/br/com/joaotadeu/features/Cadastro_parceiro_walkdog.feature",
         glue = "br.com.joaotadeu.steps",
-        plugin = {"pretty", "html: targer/logs/report-html", "json: targer/logs/report.json"},
+        plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"},
         tags = "@campos_obrigatorios"
 )
 public class Runner {
