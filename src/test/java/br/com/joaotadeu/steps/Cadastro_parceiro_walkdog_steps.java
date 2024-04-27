@@ -33,6 +33,7 @@ public class Cadastro_parceiro_walkdog_steps {
         //Configuração do navegador
         navegador = new FirefoxDriver();
         WebDriverManager.firefoxdriver().setup();
+        navegador.manage().window().maximize();
         System.out.println("Iniciando Teste...");
 
     }
@@ -145,11 +146,39 @@ public class Cadastro_parceiro_walkdog_steps {
 
     @Quando("tento cadastrar um parceiro sem preencher os campos obrigatórios")
     public void tentoCadastrarUmParceiroSemPreencherOsCamposObrigatorios() {
-        System.out.println("Passei por aqui");
+        navegador.findElement(By.cssSelector(".button-register")).click();
+
     }
 
     @Então("devo ver uma mensagem de erro informando que os campos obrigatórios não foram preenchidos")
-    public void devoVerUmaMensagemDeErroInformandoQueOsCamposObrigatoriosNaoForamPreenchidos() {
-        System.out.println("Passei por aqui");
+    public void devo_ver_uma_mensagem_de_erro_informando_que_os_campos_obrigatórios_não_foram_preenchidos(io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> dados = dataTable.asMaps(String.class, String.class);
+
+        // Encontrar e validar a mensagem de erro para o campo Nome Completo
+        WebElement nomeErrorElement = navegador.findElement(By.cssSelector("#page-walker > form:nth-child(2) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) > span:nth-child(2)"));
+        String nomeErrorMessage = nomeErrorElement.getText();
+        Assert.assertEquals(dados.get(0).get("Nome Completo"), nomeErrorMessage);
+
+        // Encontrar e validar a mensagem de erro para o campo E-mail
+        WebElement emailErrorElement = navegador.findElement(By.cssSelector("div.field-group:nth-child(3) > div:nth-child(1) > span:nth-child(2)"));
+        String emailErrorMessage = emailErrorElement.getText();
+        Assert.assertEquals(dados.get(0).get("E-mail"), emailErrorMessage);
+
+        // Encontrar e validar a mensagem de erro para o campo CPF
+        WebElement cpfErrorElement = navegador.findElement(By.cssSelector("div.field-group:nth-child(3) > div:nth-child(2) > span:nth-child(2)"));
+        String cpfErrorMessage = cpfErrorElement.getText();
+        Assert.assertEquals(dados.get(0).get("CPF"), cpfErrorMessage);
+
+        // Encontrar e validar a mensagem de erro para o campo Número
+        WebElement numeroErrorElement = navegador.findElement(By.cssSelector("div.field-group:nth-child(4) > div:nth-child(1) > span:nth-child(2)"));
+        String numeroErrorMessage = numeroErrorElement.getText();
+        Assert.assertEquals(dados.get(0).get("Número"), numeroErrorMessage);
+
+        // Encontrar e validar a mensagem de erro para o campo Documento
+        WebElement documentoErrorElement = navegador.findElement(By.cssSelector("span.alert-error:nth-child(7)"));
+        String documentoErrorMessage = documentoErrorElement.getText();
+        Assert.assertEquals(dados.get(0).get("Documento"), documentoErrorMessage);
+
     }
+
 }
