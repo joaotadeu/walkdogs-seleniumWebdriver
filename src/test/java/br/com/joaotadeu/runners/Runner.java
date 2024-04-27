@@ -7,7 +7,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/java/br/com/joaotadeu/features/Cadastro_parceiro_walkdog.feature",
+        features = "src/test/java/br/com/joaotadeu/features/walkdog.feature",
         glue = "br.com.joaotadeu.steps",
         plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"},
         tags = "@campos_obrigatorios"
