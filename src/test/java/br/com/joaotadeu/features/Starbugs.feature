@@ -14,14 +14,15 @@ Funcionalidade: Catálogo de cafés
   Esquema do Cenário: Iniciar a compra de um café
     Dado que estou na página principal da Starbugs
     E que desejo comprar o seguinte produto:
-      | Nome   | Preço   | Entrega  |
-      | <Nome> | <Preço> | Entrega< |
+      | Nome   | Preço   | Entrega   |
+      | <Nome> | <Preço> | <Entrega> |
     Quando inicio a compra desse item
     Então devo ver a página de Checkout com os detalhes do produto
     E o valor total da compra deve ser de 'R$ 19,99'
+
     Exemplos:
-      | Nome | Preço | Entrega |
-      |      |       |         |
+      | Nome  | Preço | Entrega |
+      | teste | teste | teste   |
 
   @compra_sucesso
   Cenario: Compra bem sucedida
