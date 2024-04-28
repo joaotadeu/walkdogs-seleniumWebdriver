@@ -9,8 +9,8 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
         features = "src/test/java/br/com/joaotadeu/features/Starbugs.feature",
         glue = "br.com.joaotadeu.steps",
-        plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"}
-        //tags = "@campos_obrigatorios"
+        plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"},
+        tags = "@validação_catalogo"
 )
 public class Runner {
 
