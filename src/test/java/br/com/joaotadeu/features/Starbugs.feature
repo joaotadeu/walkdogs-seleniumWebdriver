@@ -7,8 +7,8 @@ Funcionalidade: Catálogo de cafés
 
   @validação_catalogo
   Cenario: Acessando pagina web do starbugs e efetuar compras
-    Dado que estou na página principal da Starbugs
-    Então eu devo visualizar uma lista de cafés disponíveis
+    Dado que estou na pagina principal da Starbugs
+    Então eu devo visualizar uma lista de cafes disponíveis
 
   @checkout_cafe
   Esquema do Cenário: Iniciar a compra de um café
@@ -21,8 +21,8 @@ Funcionalidade: Catálogo de cafés
     E o valor total da compra deve ser de 'R$ 19,99'
 
     Exemplos:
-      | Nome  | Preço | Entrega |
-      | teste | teste | teste   |
+      | Nome  | Preço | Entrega | Valor_total |
+      | teste | teste | teste   | teste       |
 
   @compra_sucesso
   Cenario: Compra bem sucedida
