@@ -7,10 +7,10 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/java/br/com/joaotadeu/features/Walkdog.feature",
+        features = "src/test/java/br/com/joaotadeu/features/Starbugs.feature",
         glue = "br.com.joaotadeu.steps",
         plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"},
-        tags = "@cadastro_com_sucesso"
+        tags = "@checkout_cafe"
 )
 public class Runner {
 
