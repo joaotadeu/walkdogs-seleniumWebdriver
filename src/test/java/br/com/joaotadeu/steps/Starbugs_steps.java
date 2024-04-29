@@ -1,5 +1,6 @@
 package br.com.joaotadeu.steps;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -14,37 +15,35 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Starbugs_steps {
 
-    private WebDriver navegador;
+    private WebDriver navegadorStarbugs;
 
     @Before
-    public void setUpStarbugs(){
+    public void setUpStarbugsStarbugs(){
         // Configuração do navegador
         WebDriverManager.firefoxdriver().setup();
-        navegador = new FirefoxDriver();
+        navegadorStarbugs = new FirefoxDriver();
         System.out.println("Iniciando Teste...");
     }
 
     @After
-    public void fecharNavegador(){
-        if (navegador != null) {
-            navegador.quit();
-        }
+    public void fecharNavegadorStarbugs(){
+        navegadorStarbugs.quit();
         System.out.println("Finalizando Teste...");
     }
 
     @Dado("que estou na pagina principal da Starbugs")
     public void que_estou_na_pagina_principal_da_starbugs() {
-        navegador.get("https://starbugs.vercel.app/");
+        navegadorStarbugs.get("https://starbugs.vercel.app/");
     }
 
     @Então("eu devo visualizar uma lista de cafes disponíveis")
     public void eu_devo_visualizar_uma_lista_de_cafes_disponíveis() {
-        WebElement listaDeCafes = navegador.findElement(By.cssSelector(".sc-hhOBVt"));
+        WebElement listaDeCafes = navegadorStarbugs.findElement(By.cssSelector(".sc-hhOBVt"));
         assertTrue(listaDeCafes.isDisplayed());
     }
 
     @E("que desejo comprar o seguinte produto")
-    public void queDesejoComprarOSeguinteProduto() {
+    public void queDesejoComprarOSeguinteProduto(DataTable dataTable) {
         System.out.println("Passei por aqui");
     }
 

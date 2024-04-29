@@ -26,34 +26,34 @@ import java.util.Map;
 public class Walkdog_steps {
 
     //Transforma a Variável e uma Variável global
-    private WebDriver navegador;
+    private WebDriver navegadorWalkdogs;
 
     @Before
     public void setUpWalkdogs(){
         //Configuração do navegador
         WebDriverManager.firefoxdriver().setup();
-        navegador = new FirefoxDriver();
+        navegadorWalkdogs = new FirefoxDriver();
         System.out.println("Iniciando Teste...");
 
     }
 
     @After(order = 1)
-    public void tirarPrint(Scenario cenario) throws IOException {
-      File file =  ((TakesScreenshot)navegador).getScreenshotAs(OutputType.FILE);
+    public void tirarPrintWalkdogs(Scenario cenario) throws IOException {
+      File file =  ((TakesScreenshot)navegadorWalkdogs).getScreenshotAs(OutputType.FILE);
       FileUtils.copyFile(file, new File("evidencias/screenshot/"+cenario.getId()+".jpg"));
     }
 
     @After(order = 0)
-    public void fecharNavegador(){
-        navegador.quit();
+    public void fecharNavegadorWalkdogs(){
+        navegadorWalkdogs.quit();
         System.out.println("Finalizando Teste...");
 
     }
 
     @Dado("que estou na pagina principal do WalkDog")
     public void que_estou_na_pagina_principal_do_walk_dog() {
-        navegador.get("https://walkdog.vercel.app/");
-        navegador.findElement(By.cssSelector(".content > main:nth-child(1) > a:nth-child(4) > span:nth-child(1)")).click();
+        navegadorWalkdogs.get("https://walkdog.vercel.app/");
+        navegadorWalkdogs.findElement(By.cssSelector(".content > main:nth-child(1) > a:nth-child(4) > span:nth-child(1)")).click();
 
     }
 
@@ -61,19 +61,19 @@ public class Walkdog_steps {
     public void preencho_os_dados_pessoais_do_parceiro(io.cucumber.datatable.DataTable dataTable) {
         List<Map<String, String>> dadosParceiro = dataTable.asMaps(String.class, String.class);
 
-        WebElement nomeInput = navegador.findElement(By.name("name"));
-        WebElement emailInput = navegador.findElement(By.name("email"));
-        WebElement cpfInput = navegador.findElement(By.name("cpf"));
-        WebElement cepInput = navegador.findElement(By.name("cep"));
-        WebElement numeroInput = navegador.findElement(By.name("addressNumber"));
-        WebElement complementoInput = navegador.findElement(By.name("addressDetails"));
+        WebElement nomeInput = navegadorWalkdogs.findElement(By.name("name"));
+        WebElement emailInput = navegadorWalkdogs.findElement(By.name("email"));
+        WebElement cpfInput = navegadorWalkdogs.findElement(By.name("cpf"));
+        WebElement cepInput = navegadorWalkdogs.findElement(By.name("cep"));
+        WebElement numeroInput = navegadorWalkdogs.findElement(By.name("addressNumber"));
+        WebElement complementoInput = navegadorWalkdogs.findElement(By.name("addressDetails"));
 
         // Preenchendo os campos com os dados do parceiro
         nomeInput.sendKeys(dadosParceiro.get(0).get("Nome Completo"));
         emailInput.sendKeys(dadosParceiro.get(0).get("E-mail"));
         cpfInput.sendKeys(dadosParceiro.get(0).get("CPF"));
         cepInput.sendKeys(dadosParceiro.get(0).get("CEP"));
-        navegador.findElement(By.cssSelector("input[type=\"button\"]")).click();
+        navegadorWalkdogs.findElement(By.cssSelector("input[type=\"button\"]")).click();
         numeroInput.sendKeys(dadosParceiro.get(0).get("Numero"));
         complementoInput.sendKeys(dadosParceiro.get(0).get("Complemento"));
 
@@ -91,11 +91,11 @@ public class Walkdog_steps {
             switch (atividadeExtra.toLowerCase()) {
                 case "cuidar":
                     // Lógica para selecionar a atividade "cuidar"
-                    navegador.findElement(By.cssSelector(".walker-service > li:nth-child(1) > span:nth-child(2)")).click();
+                    navegadorWalkdogs.findElement(By.cssSelector(".walker-service > li:nth-child(1) > span:nth-child(2)")).click();
                     break;
                 case "adestrar":
                     // Lógica para selecionar a atividade "adestrar"
-                    navegador.findElement(By.cssSelector(".walker-service > li:nth-child(2) > span:nth-child(2)")).click();
+                    navegadorWalkdogs.findElement(By.cssSelector(".walker-service > li:nth-child(2) > span:nth-child(2)")).click();
                     break;
                 default:
                     // Tratamento para tipos de atividade inválidos
@@ -116,12 +116,12 @@ public class Walkdog_steps {
         String caminhoDoArquivo = dadosDocumento.get(0).get("Caminho Documento");
 
         // Localizar o elemento de upload na página
-        WebElement fileInput = navegador.findElement(By.cssSelector("input[type='file']"));
+        WebElement fileInput = navegadorWalkdogs.findElement(By.cssSelector("input[type='file']"));
 
         // Enviar o caminho do arquivo para o elemento de upload
         fileInput.sendKeys(caminhoDoArquivo);
 
-        navegador.findElement(By.cssSelector(".button-register")).click();
+        navegadorWalkdogs.findElement(By.cssSelector(".button-register")).click();
 
     }
 
@@ -134,7 +134,7 @@ public class Walkdog_steps {
         Duration tempoDeEspera = Duration.ofSeconds(tempoEsperaEmSegundos);
 
         // Aguardar até que o elemento seja visível
-        WebDriverWait wait = new WebDriverWait(navegador, tempoDeEspera);
+        WebDriverWait wait = new WebDriverWait(navegadorWalkdogs, tempoDeEspera);
         WebElement mensagemElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#swal2-html-container")));
 
         // Verificar se a mensagem exibida é igual à mensagem esperada
@@ -145,7 +145,7 @@ public class Walkdog_steps {
 
     @Quando("tento cadastrar um parceiro sem preencher os campos obrigatórios")
     public void tentoCadastrarUmParceiroSemPreencherOsCamposObrigatorios() {
-        navegador.findElement(By.cssSelector(".button-register")).click();
+        navegadorWalkdogs.findElement(By.cssSelector(".button-register")).click();
 
     }
 
@@ -154,27 +154,27 @@ public class Walkdog_steps {
         List<Map<String, String>> dados = dataTable.asMaps(String.class, String.class);
 
         // Encontrar e validar a mensagem de erro para o campo Nome Completo
-        WebElement nomeErrorElement = navegador.findElement(By.cssSelector("#page-walker > form:nth-child(2) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) > span:nth-child(2)"));
+        WebElement nomeErrorElement = navegadorWalkdogs.findElement(By.cssSelector("#page-walker > form:nth-child(2) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) > span:nth-child(2)"));
         String nomeErrorMessage = nomeErrorElement.getText();
         Assert.assertEquals(dados.get(0).get("Nome Completo"), nomeErrorMessage);
 
         // Encontrar e validar a mensagem de erro para o campo E-mail
-        WebElement emailErrorElement = navegador.findElement(By.cssSelector("div.field-group:nth-child(3) > div:nth-child(1) > span:nth-child(2)"));
+        WebElement emailErrorElement = navegadorWalkdogs.findElement(By.cssSelector("div.field-group:nth-child(3) > div:nth-child(1) > span:nth-child(2)"));
         String emailErrorMessage = emailErrorElement.getText();
         Assert.assertEquals(dados.get(0).get("E-mail"), emailErrorMessage);
 
         // Encontrar e validar a mensagem de erro para o campo CPF
-        WebElement cpfErrorElement = navegador.findElement(By.cssSelector("div.field-group:nth-child(3) > div:nth-child(2) > span:nth-child(2)"));
+        WebElement cpfErrorElement = navegadorWalkdogs.findElement(By.cssSelector("div.field-group:nth-child(3) > div:nth-child(2) > span:nth-child(2)"));
         String cpfErrorMessage = cpfErrorElement.getText();
         Assert.assertEquals(dados.get(0).get("CPF"), cpfErrorMessage);
 
         // Encontrar e validar a mensagem de erro para o campo Número
-        WebElement numeroErrorElement = navegador.findElement(By.cssSelector("div.field-group:nth-child(4) > div:nth-child(1) > span:nth-child(2)"));
+        WebElement numeroErrorElement = navegadorWalkdogs.findElement(By.cssSelector("div.field-group:nth-child(4) > div:nth-child(1) > span:nth-child(2)"));
         String numeroErrorMessage = numeroErrorElement.getText();
         Assert.assertEquals(dados.get(0).get("Número"), numeroErrorMessage);
 
         // Encontrar e validar a mensagem de erro para o campo Documento
-        WebElement documentoErrorElement = navegador.findElement(By.cssSelector("span.alert-error:nth-child(7)"));
+        WebElement documentoErrorElement = navegadorWalkdogs.findElement(By.cssSelector("span.alert-error:nth-child(7)"));
         String documentoErrorMessage = documentoErrorElement.getText();
         Assert.assertEquals(dados.get(0).get("Documento"), documentoErrorMessage);
 
