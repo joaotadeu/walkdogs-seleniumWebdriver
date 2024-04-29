@@ -12,17 +12,17 @@ Funcionalidade: Catálogo de cafés
 
   @checkout_cafe
   Esquema do Cenário: Iniciar a compra de um café
-    Dado que estou na página principal da Starbugs
-    E que desejo comprar o seguinte produto:
+    Dado que estou na pagina principal da Starbugs
+    E que desejo comprar o seguinte produto
       | Nome   | Preço   | Entrega   |
       | <Nome> | <Preço> | <Entrega> |
     Quando inicio a compra desse item
     Então devo ver a página de Checkout com os detalhes do produto
-    E o valor total da compra deve ser de 'R$ 19,99'
+    E o valor total da compra deve ser de '<Valor_total>'
 
     Exemplos:
-      | Nome  | Preço | Entrega | Valor_total |
-      | teste | teste | teste   | teste       |
+      | Nome      | Preço   | Entrega  | Valor_total |
+      | Capuccino | R$19,99 | R$ 10,00 | R$ 29,99    |
 
   @compra_sucesso
   Cenario: Compra bem sucedida
