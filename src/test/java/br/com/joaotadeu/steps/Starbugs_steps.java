@@ -2,16 +2,13 @@ package br.com.joaotadeu.steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.pt.Dado;
+import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
+import io.cucumber.java.pt.Quando;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.io.File;
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,17 +23,9 @@ public class Starbugs_steps {
         WebDriverManager.firefoxdriver().setup();
         navegador.manage().window().maximize();
         System.out.println("Iniciando Teste...");
-
     }
 
-    @After(order = 1)
-    public void tirarPrint(Scenario cenario) throws IOException {
-        File file =  ((TakesScreenshot)navegador).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(file, new File("evidencias/screenshot/"+cenario.getId()+".jpg"));
-
-    }
-
-    @After(order = 0)
+    @After
     public void fecharNavegador(){
         navegador.quit();
         System.out.println("Finalizando Teste...");
@@ -51,5 +40,26 @@ public class Starbugs_steps {
     public void eu_devo_visualizar_uma_lista_de_cafes_disponíveis() {
         WebElement listaDeCafes = navegador.findElement(By.cssSelector(".sc-hhOBVt"));
         assertTrue(listaDeCafes.isDisplayed());
+    }
+
+    @E("que desejo comprar o seguinte produto")
+    public void queDesejoComprarOSeguinteProduto() {
+        System.out.println("Passei por aqui");
+    }
+
+    @Quando("inicio a compra desse item")
+    public void inicioACompraDesseItem() {
+        System.out.println("Passei por aqui");
+
+    }
+
+    @Então("devo ver a página de Checkout com os detalhes do produto")
+    public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() {
+        System.out.println("Passei por aqui");
+    }
+
+    @E("o valor total da compra deve ser de {string}")
+    public void oValorTotalDaCompraDeveSerDe(String arg0) {
+        System.out.println("Passei por aqui");
     }
 }

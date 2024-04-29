@@ -33,7 +33,6 @@ public class Walkdog_steps {
         //Configuração do navegador
         navegador = new FirefoxDriver();
         WebDriverManager.firefoxdriver().setup();
-        navegador.manage().window().maximize();
         System.out.println("Iniciando Teste...");
 
     }
