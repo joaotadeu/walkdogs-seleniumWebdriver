@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Starbugs_steps {
+public class starbugs_steps {
 
     private WebDriver navegadorStarbugs;
 

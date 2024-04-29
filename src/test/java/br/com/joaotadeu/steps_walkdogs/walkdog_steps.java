@@ -23,7 +23,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
-public class Walkdog_steps {
+public class walkdog_steps {
 
     //Transforma a Variável e uma Variável global
     private WebDriver navegadorWalkdogs;
