@@ -29,10 +29,10 @@ public class Walkdog_steps {
     private WebDriver navegador;
 
     @Before
-    public void setUp(){
+    public void setUpWalkdogs(){
         //Configuração do navegador
-        navegador = new FirefoxDriver();
         WebDriverManager.firefoxdriver().setup();
+        navegador = new FirefoxDriver();
         System.out.println("Iniciando Teste...");
 
     }

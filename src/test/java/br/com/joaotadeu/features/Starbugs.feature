@@ -1,6 +1,5 @@
 #language: pt
 
-@compra_de_cafe_starbug
 Funcionalidade: Catálogo de cafés
   Como um usuário do site, eu quero ver o catálogo de cafés na pagina principal
   Para que eu possa escolher e saber mais sobre os produtos disponíveis
@@ -11,7 +10,7 @@ Funcionalidade: Catálogo de cafés
     Então eu devo visualizar uma lista de cafes disponíveis
 
   @checkout_cafe
-  Esquema do Cenário: Iniciar a compra de um café
+  Esquema do Cenario: Iniciar a compra de um café
     Dado que estou na pagina principal da Starbugs
     E que desejo comprar o seguinte produto
       | Nome   | Preço   | Entrega   |

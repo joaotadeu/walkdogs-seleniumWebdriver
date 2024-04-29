@@ -17,20 +17,21 @@ public class Starbugs_steps {
     private WebDriver navegador;
 
     @Before
-    public void setUp(){
-        //Configuração do navegador
-        navegador = new FirefoxDriver();
+    public void setUpStarbugs(){
+        // Configuração do navegador
         WebDriverManager.firefoxdriver().setup();
-
+        navegador = new FirefoxDriver();
         System.out.println("Iniciando Teste...");
     }
 
     @After
     public void fecharNavegador(){
-        navegador.quit();
+        if (navegador != null) {
+            navegador.quit();
+        }
         System.out.println("Finalizando Teste...");
-
     }
+
     @Dado("que estou na pagina principal da Starbugs")
     public void que_estou_na_pagina_principal_da_starbugs() {
         navegador.get("https://starbugs.vercel.app/");

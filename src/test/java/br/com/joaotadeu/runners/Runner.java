@@ -1,7 +1,6 @@
 package br.com.joaotadeu.runners;
 
 import org.junit.runner.RunWith;
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 

@@ -9,7 +9,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 @DisplayName("Teste automatizado teste de ambiente")
 public class TestAmbienteTest {
 
-    @Test
     @DisplayName("Teste automatizado")
     public void testAmbiente (){
         //Configuração do ambiente
