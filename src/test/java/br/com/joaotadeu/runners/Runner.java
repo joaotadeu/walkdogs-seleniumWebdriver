@@ -7,7 +7,7 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/java/br/com/joaotadeu/features/Starbugs.feature",
-        glue = "br.com.joaotadeu.steps",
+        glue = "br.com.joaotadeu.steps_starbugs",
         plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"},
         tags = "@checkout_cafe"
 )
