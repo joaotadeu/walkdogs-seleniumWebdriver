@@ -16,16 +16,20 @@ Funcionalidade: Catálogo de cafés
       | Nome   | Preço   | Entrega   |
       | <Nome> | <Valor> | <Entrega> |
     Então devo ver a página de Checkout com os detalhes do produto
-    E o valor total da compra deve ser de '<Valor_total>'
+    E o valor total da compra deve ser de '<Valor total>'
 
     Exemplos:
-      | Nome      | Valor | Entrega | Valor_total |
-      | Capuccino | 19,99 | 10,00   | 29,99       |
+      | Nome      | Valor | Entrega | Valor total |
+      | Capuccino | 19,99 | 10,00   | 29.99       |
 
   @compra_sucesso
   Cenario: Compra bem sucedida
-    Dado que estou na página principal da Starbugs
-    E que iniciei a compra do item "Expresso Tradicional"
+    Dado que estou na pagina principal da Starbugs
+    Quando desejo comprar o seguinte produto
+      | Nome   | Preço   | Entrega   |
+      | <Nome> | <Valor> | <Entrega> |
+    Então devo ver a página de Checkout com os detalhes do produto
+    E o valor total da compra deve ser de '<Valor total>'
     Quando faço a busca do seguinte CEP: "14020055"
     E informo os demais dados do endereço:
       | Numero   | Detalhes     |

@@ -8,6 +8,7 @@ import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -48,7 +49,7 @@ public class starbugs_steps {
     @Quando("desejo comprar o seguinte produto")
     public void desejoComprarOSeguinteProduto(DataTable dataTable) throws InterruptedException {
         List<Map<String, String>> produtos = dataTable.asMaps(String.class, String.class);
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         for (Map<String, String> produto : produtos) {
             String nomeProduto = produto.get("Nome");
 
@@ -69,14 +70,68 @@ public class starbugs_steps {
     }
 
     @Então("devo ver a página de Checkout com os detalhes do produto")
-    public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() {
+    public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() throws InterruptedException {
+        Thread.sleep(1000);
         WebElement checkoutPedido = navegadorStarbugs.findElement(By.cssSelector(".sc-hHTYSt"));
         assertTrue(checkoutPedido.isDisplayed());
     }
 
     @E("o valor total da compra deve ser de {string}")
-    public void oValorTotalDaCompraDeveSerDe(String arg0) {
-        System.out.println("Passei por aqui");
+    public void oValorTotalDaCompraDeveSerDe(String valorTotalEsperado) {
+        // Removendo o símbolo de R$ e substituindo vírgulas por pontos para garantir que seja um número válido
+        String valorTotalEsperadoLimpo = valorTotalEsperado.replace("R$ ", "").replace(",", ".");
+
+        // Convertendo a string para um tipo numérico (long)
+        long valorTotalEsperadoNum = (long) (Double.parseDouble(valorTotalEsperadoLimpo) * 100);
+
+        // Obtendo o elemento que contém o valor total da compra na tela
+        WebElement valorTotalElement = navegadorStarbugs.findElement(By.cssSelector("p.total-price"));
+
+        // Obtendo o texto do valor total da compra na tela e convertendo para um tipo numérico (long)
+        String valorTotalTexto = valorTotalElement.getText().replace("R$ ", "").replace(",", ".");
+        long valorTotalTela = (long) (Double.parseDouble(valorTotalTexto) * 100);
+
+        // Validando se o valor total da compra na tela corresponde ao valor esperado
+        Assert.assertEquals(valorTotalEsperadoNum, valorTotalTela);
     }
 
+    @Quando("faço a busca do seguinte CEP: {string}")
+    public void facoABuscaDoSeguinteCEP(String arg0) {
+    }
+
+    @E("informo os demais dados do endereço:")
+    public void informoOsDemaisDadosDoEndereco() {
+    }
+
+    @E("escolho a forma de pagamento: {string}")
+    public void escolhoAFormaDePagamento(String arg0) {
+    }
+
+    @E("por fim finalizo a compra")
+    public void porFimFinalizoACompra() {
+    }
+
+    @Então("sou redirecionado para a página de confirmação de Pedidos e visualizo a mensagem {string}")
+    public void souRedirecionadoParaAPaginaDeConfirmacaoDePedidosEVisualizoAMensagem(String arg0) {
+    }
+
+    @E("deve ser informado o seguinte prazo de entrega: {string}")
+    public void deveSerInformadoOSeguintePrazoDeEntrega(String arg0) {
+    }
+
+    @Dado("que estou na página principal da Starbugs")
+    public void queEstouNaPaginaPrincipalDaStarbugs() {
+    }
+
+    @E("que desejo comprar o seguinte produto:")
+    public void queDesejoComprarOSeguinteProduto() {
+    }
+
+    @Quando("inicio a compra desse item")
+    public void inicioACompraDesseItem() {
+    }
+
+    @Então("devo ver um popup informando que o produto está indisponível com a mensagem {string}")
+    public void devoVerUmPopupInformandoQueOProdutoEstaIndisponivelComAMensagem(String arg0) {
+    }
 }

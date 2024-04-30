@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
         features = "src/test/java/br/com/joaotadeu/features/Starbugs.feature",
         glue = "br.com.joaotadeu.steps_starbugs",
         plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"},
-        tags = "@checkout_cafe"
+        tags = "@compra_sucesso"
 )
 public class Runner {
 
