@@ -152,6 +152,7 @@ public class starbugs_steps {
 
     @E("por fim finalizo a compra")
     public void porFimFinalizoACompra() {
+        navegadorStarbugs.findElement(By.cssSelector(".sc-idXgbr")).click();
     }
 
     @Então("sou redirecionado para a página de confirmação de Pedidos e visualizo a mensagem {string}")
