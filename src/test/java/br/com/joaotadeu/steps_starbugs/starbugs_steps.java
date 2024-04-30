@@ -65,13 +65,13 @@ public class starbugs_steps {
 
             // Clicando no botão de compra
             botaoComprar.click();
-
         }
     }
 
     @Então("devo ver a página de Checkout com os detalhes do produto")
     public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() {
-        System.out.println("Passei por aqui");
+        WebElement checkoutPedido = navegadorStarbugs.findElement(By.cssSelector(".sc-hHTYSt"));
+        assertTrue(checkoutPedido.isDisplayed());
     }
 
     @E("o valor total da compra deve ser de {string}")
