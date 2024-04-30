@@ -34,14 +34,16 @@ Funcionalidade: Catálogo de cafés
       E informo os demais dados do endereço:
         | Numero   | Detalhes   |
         | <Numero> | <Detalhes> |
-      E escolho a forma de pagamento: "<Pagamento>"
+      E escolho a forma de pagamento:
+        | Pagamento   |
+        | <Pagamento> |
       E por fim finalizo a compra
     Então sou redirecionado para a página de confirmação de Pedidos e visualizo a mensagem "Uhull! Pedido confirmado"
       E deve ser informado o seguinte prazo de entrega: "20 min - 30 min"
 
     Exemplos:
-      | Nome      | Valor | Entrega | Valor total | CEP      | Numero | Detalhes | Pagamento        |
-      | Capuccino | 19,99 | 10,00   | 29,99       | 14020055 | 2072   | Apto 65  | Cartão de Débito |
+      | Nome      | Valor | Entrega | Valor total | CEP      | Numero | Detalhes | Pagamento         |
+      | Capuccino | 19,99 | 10,00   | 29,99       | 14020055 | 2072   | Apto 65  | cartao de credito |
 
   @compra_indisponivel
   Cenário: Café indisponível

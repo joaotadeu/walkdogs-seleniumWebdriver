@@ -75,7 +75,7 @@ public class starbugs_steps {
     }
 
     @Então("devo ver a página de Checkout com os detalhes do produto")
-    public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() throws InterruptedException {
+    public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() {
         WebElement checkoutPedido = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sc-hHTYSt")));
         assertTrue(checkoutPedido.isDisplayed());
     }
@@ -123,8 +123,31 @@ public class starbugs_steps {
 
     }
 
-    @E("escolho a forma de pagamento: {string}")
-    public void escolhoAFormaDePagamento(String arg0) {
+    @E("escolho a forma de pagamento:")
+    public void escolhoAFormaDePagamento(DataTable dataTable) {
+        List<Map<String, String>> formaPagamento = dataTable.asMaps(String.class, String.class);
+
+        for (Map<String, String> opcao : formaPagamento) {
+            String metodoPagamento = opcao.get("Pagamento").toLowerCase();
+
+            switch (metodoPagamento) {
+                case "cartao de credito":
+                    WebElement cartaoCredito = navegadorStarbugs.findElement(By.cssSelector("div.sc-fnGiBr:nth-child(1) > label:nth-child(2) > div:nth-child(1)"));
+                    cartaoCredito.click();
+                    break;
+                case "cartao de debito":
+                    WebElement cartaoDebito = navegadorStarbugs.findElement(By.cssSelector("div.sc-fnGiBr:nth-child(2) > label:nth-child(2) > div:nth-child(1)"));
+                    cartaoDebito.click();
+                    break;
+                case "avista no pix":
+                    WebElement pix = navegadorStarbugs.findElement(By.cssSelector("div.sc-fnGiBr:nth-child(3) > label:nth-child(2) > div:nth-child(1)"));
+                    pix.click();
+                    break;
+                default:
+                    System.out.println("Método de pagamento não reconhecido: " + metodoPagamento);
+                    break;
+            }
+        }
     }
 
     @E("por fim finalizo a compra")
@@ -154,4 +177,5 @@ public class starbugs_steps {
     @Então("devo ver um popup informando que o produto está indisponível com a mensagem {string}")
     public void devoVerUmPopupInformandoQueOProdutoEstaIndisponivelComAMensagem(String arg0) {
     }
+
 }
