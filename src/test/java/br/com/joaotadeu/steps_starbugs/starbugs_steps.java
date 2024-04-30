@@ -11,7 +11,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
@@ -20,12 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class starbugs_steps {
 
     private WebDriver navegadorStarbugs;
+    private WebDriverWait wait;
 
     @Before
     public void setUpStarbugsStarbugs(){
         // Configuração do navegador
         WebDriverManager.firefoxdriver().setup();
         navegadorStarbugs = new FirefoxDriver();
+        wait = new WebDriverWait(navegadorStarbugs, Duration.ofSeconds(10)); // Espera de até 10 segundos
         System.out.println("Iniciando Teste...");
     }
 
@@ -42,27 +47,25 @@ public class starbugs_steps {
 
     @Então("eu devo visualizar uma lista de cafes disponíveis")
     public void eu_devo_visualizar_uma_lista_de_cafes_disponíveis() {
-        WebElement listaDeCafes = navegadorStarbugs.findElement(By.cssSelector(".sc-hhOBVt"));
+        WebElement listaDeCafes = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sc-hhOBVt")));
         assertTrue(listaDeCafes.isDisplayed());
     }
 
     @Quando("desejo comprar o seguinte produto")
-    public void desejoComprarOSeguinteProduto(DataTable dataTable) throws InterruptedException {
+    public void desejoComprarOSeguinteProduto(DataTable dataTable) {
         List<Map<String, String>> produtos = dataTable.asMaps(String.class, String.class);
-        Thread.sleep(1000);
         for (Map<String, String> produto : produtos) {
             String nomeProduto = produto.get("Nome");
 
             // Localizando o elemento pelo nome do produto
-            WebElement produtoElement = navegadorStarbugs.findElement(By.xpath("//h1[contains(@class, 'coffee-name') and text()='" + nomeProduto + "']"));
+            WebElement produtoElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(@class, 'coffee-name') and text()='" + nomeProduto + "']")));
 
             // Validando o preço
             String precoEsperado = produto.get("Preço");
-            WebElement precoElement = navegadorStarbugs.findElement(By.xpath("//strong[contains(@class, 'hblMil') and text()='" + precoEsperado + "']"));
-            String precoAtual = precoElement.getText();
+            WebElement precoElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//strong[contains(@class, 'hblMil') and text()='" + precoEsperado + "']")));
 
             // Localizando o botão de compra para o mesmo produto
-            WebElement botaoComprar = produtoElement.findElement(By.xpath("./following-sibling::div//button[contains(@class, 'buy-coffee')]"));
+            WebElement botaoComprar = wait.until(ExpectedConditions.elementToBeClickable(produtoElement.findElement(By.xpath("./following-sibling::div//button[contains(@class, 'buy-coffee')]"))));
 
             // Clicando no botão de compra
             botaoComprar.click();
@@ -70,9 +73,8 @@ public class starbugs_steps {
     }
 
     @Então("devo ver a página de Checkout com os detalhes do produto")
-    public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() throws InterruptedException {
-        Thread.sleep(1000);
-        WebElement checkoutPedido = navegadorStarbugs.findElement(By.cssSelector(".sc-hHTYSt"));
+    public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() {
+        WebElement checkoutPedido = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sc-hHTYSt")));
         assertTrue(checkoutPedido.isDisplayed());
     }
 
@@ -85,7 +87,7 @@ public class starbugs_steps {
         long valorTotalEsperadoNum = (long) (Double.parseDouble(valorTotalEsperadoLimpo) * 100);
 
         // Obtendo o elemento que contém o valor total da compra na tela
-        WebElement valorTotalElement = navegadorStarbugs.findElement(By.cssSelector("p.total-price"));
+        WebElement valorTotalElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p.total-price")));
 
         // Obtendo o texto do valor total da compra na tela e convertendo para um tipo numérico (long)
         String valorTotalTexto = valorTotalElement.getText().replace("R$ ", "").replace(",", ".");

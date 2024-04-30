@@ -20,7 +20,7 @@ Funcionalidade: Catálogo de cafés
 
     Exemplos:
       | Nome      | Valor | Entrega | Valor total |
-      | Capuccino | 19,99 | 10,00   | 29.99       |
+      | Capuccino | 19,99 | 10,00   | 29,99       |
 
   @compra_sucesso
   Cenario: Compra bem sucedida
