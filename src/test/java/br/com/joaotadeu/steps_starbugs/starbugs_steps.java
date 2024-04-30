@@ -30,7 +30,7 @@ public class starbugs_steps {
         // Configuração do navegador
         WebDriverManager.firefoxdriver().setup();
         navegadorStarbugs = new FirefoxDriver();
-        wait = new WebDriverWait(navegadorStarbugs, Duration.ofSeconds(10)); // Espera de até 10 segundos
+        wait = new WebDriverWait(navegadorStarbugs, Duration.ofSeconds(10));
         System.out.println("Iniciando Teste...");
     }
 
@@ -47,13 +47,14 @@ public class starbugs_steps {
 
     @Então("eu devo visualizar uma lista de cafes disponíveis")
     public void eu_devo_visualizar_uma_lista_de_cafes_disponíveis() {
-        WebElement listaDeCafes = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sc-hhOBVt")));
+        WebElement listaDeCafes = navegadorStarbugs.findElement(By.cssSelector(".sc-hhOBVt"));
         assertTrue(listaDeCafes.isDisplayed());
     }
 
     @Quando("desejo comprar o seguinte produto")
-    public void desejoComprarOSeguinteProduto(DataTable dataTable) {
+    public void desejoComprarOSeguinteProduto(DataTable dataTable) throws InterruptedException {
         List<Map<String, String>> produtos = dataTable.asMaps(String.class, String.class);
+        Thread.sleep(5000);
         for (Map<String, String> produto : produtos) {
             String nomeProduto = produto.get("Nome");
 
@@ -63,9 +64,10 @@ public class starbugs_steps {
             // Validando o preço
             String precoEsperado = produto.get("Preço");
             WebElement precoElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//strong[contains(@class, 'hblMil') and text()='" + precoEsperado + "']")));
+            String precoAtual = precoElement.getText();
 
             // Localizando o botão de compra para o mesmo produto
-            WebElement botaoComprar = wait.until(ExpectedConditions.elementToBeClickable(produtoElement.findElement(By.xpath("./following-sibling::div//button[contains(@class, 'buy-coffee')]"))));
+            WebElement botaoComprar = produtoElement.findElement(By.xpath("./following-sibling::div//button[contains(@class, 'buy-coffee')]"));
 
             // Clicando no botão de compra
             botaoComprar.click();
@@ -73,8 +75,9 @@ public class starbugs_steps {
     }
 
     @Então("devo ver a página de Checkout com os detalhes do produto")
-    public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() {
-        WebElement checkoutPedido = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sc-hHTYSt")));
+    public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() throws InterruptedException {
+        Thread.sleep(2000);
+        WebElement checkoutPedido = navegadorStarbugs.findElement(By.cssSelector(".sc-hHTYSt"));
         assertTrue(checkoutPedido.isDisplayed());
     }
 
@@ -87,7 +90,7 @@ public class starbugs_steps {
         long valorTotalEsperadoNum = (long) (Double.parseDouble(valorTotalEsperadoLimpo) * 100);
 
         // Obtendo o elemento que contém o valor total da compra na tela
-        WebElement valorTotalElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p.total-price")));
+        WebElement valorTotalElement = navegadorStarbugs.findElement(By.cssSelector("p.total-price"));
 
         // Obtendo o texto do valor total da compra na tela e convertendo para um tipo numérico (long)
         String valorTotalTexto = valorTotalElement.getText().replace("R$ ", "").replace(",", ".");

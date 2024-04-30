@@ -23,21 +23,25 @@ Funcionalidade: Catálogo de cafés
       | Capuccino | 19,99 | 10,00   | 29,99       |
 
   @compra_sucesso
-  Cenario: Compra bem sucedida
+  Esquema do Cenario: Compra bem sucedida
     Dado que estou na pagina principal da Starbugs
     Quando desejo comprar o seguinte produto
       | Nome   | Preço   | Entrega   |
       | <Nome> | <Valor> | <Entrega> |
     Então devo ver a página de Checkout com os detalhes do produto
-    E o valor total da compra deve ser de '<Valor total>'
-    Quando faço a busca do seguinte CEP: "14020055"
-    E informo os demais dados do endereço:
-      | Numero   | Detalhes     |
-      | 2072     | Apto 65      |
-    E escolho a forma de pagamento: "Cartão de Débito"
-    E por fim finalizo a compra
+      E o valor total da compra deve ser de '<Valor total>'
+    Quando faço a busca do seguinte CEP: "<CEP>"
+      E informo os demais dados do endereço:
+        | Numero   | Detalhes   |
+        | <Numero> | <Detalhes> |
+      E escolho a forma de pagamento: "<Pagamento>"
+      E por fim finalizo a compra
     Então sou redirecionado para a página de confirmação de Pedidos e visualizo a mensagem "Uhull! Pedido confirmado"
-    E deve ser informado o seguinte prazo de entrega: "20 min - 30 min"
+      E deve ser informado o seguinte prazo de entrega: "20 min - 30 min"
+
+    Exemplos:
+      | Nome      | Valor | Entrega | Valor total | CEP      | Numero | Detalhes | Pagamento        |
+      | Capuccino | 19,99 | 10,00   | 29,99       | 14020055 | 2072   | Apto 65  | Cartão de Débito |
 
   @compra_indisponivel
   Cenário: Café indisponível
