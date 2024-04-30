@@ -52,9 +52,9 @@ public class starbugs_steps {
     }
 
     @Quando("desejo comprar o seguinte produto")
-    public void desejoComprarOSeguinteProduto(DataTable dataTable) throws InterruptedException {
+    public void desejoComprarOSeguinteProduto(DataTable dataTable) {
         List<Map<String, String>> produtos = dataTable.asMaps(String.class, String.class);
-        Thread.sleep(5000);
+
         for (Map<String, String> produto : produtos) {
             String nomeProduto = produto.get("Nome");
 
@@ -76,8 +76,7 @@ public class starbugs_steps {
 
     @Então("devo ver a página de Checkout com os detalhes do produto")
     public void devoVerAPaginaDeCheckoutComOsDetalhesDoProduto() throws InterruptedException {
-        Thread.sleep(2000);
-        WebElement checkoutPedido = navegadorStarbugs.findElement(By.cssSelector(".sc-hHTYSt"));
+        WebElement checkoutPedido = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sc-hHTYSt")));
         assertTrue(checkoutPedido.isDisplayed());
     }
 
@@ -101,11 +100,27 @@ public class starbugs_steps {
     }
 
     @Quando("faço a busca do seguinte CEP: {string}")
-    public void facoABuscaDoSeguinteCEP(String arg0) {
+    public void facoABuscaDoSeguinteCEP(String Cep) {
+        WebElement campoBuscaCEP = navegadorStarbugs.findElement(By.cssSelector("input[name=cep]"));
+        campoBuscaCEP.sendKeys(Cep);
+        navegadorStarbugs.findElement(By.cssSelector("input[value='Buscar CEP']")).click();
     }
 
     @E("informo os demais dados do endereço:")
-    public void informoOsDemaisDadosDoEndereco() {
+    public void informoOsDemaisDadosDoEndereco(DataTable dataTable) {
+        List<Map<String, String>> dadosEndereco = dataTable.asMaps(String.class, String.class);
+
+        for (Map<String, String> dados : dadosEndereco) {
+            String numero = dados.get("Numero");
+            String detalhes = dados.get("Detalhes");
+
+            WebElement campoNumero = navegadorStarbugs.findElement(By.cssSelector("input[name=number]"));
+            campoNumero.sendKeys(numero);
+
+            WebElement campoComplemento = navegadorStarbugs.findElement(By.cssSelector("input[name=complement]"));
+            campoComplemento.sendKeys(detalhes);
+        }
+
     }
 
     @E("escolho a forma de pagamento: {string}")
