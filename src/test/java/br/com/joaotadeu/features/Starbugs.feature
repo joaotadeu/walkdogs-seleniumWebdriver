@@ -12,16 +12,15 @@ Funcionalidade: Catálogo de cafés
   @checkout_cafe
   Esquema do Cenario: Iniciar a compra de um café
     Dado que estou na pagina principal da Starbugs
-    E que desejo comprar o seguinte produto
+    Quando desejo comprar o seguinte produto
       | Nome   | Preço   | Entrega   |
       | <Nome> | <Valor> | <Entrega> |
-    Quando inicio a compra desse item
     Então devo ver a página de Checkout com os detalhes do produto
     E o valor total da compra deve ser de '<Valor_total>'
 
     Exemplos:
-      | Nome      | Valor   | Entrega | Valor_total |
-      | Capuccino | R$19,99 | R$10,00 | R$29,99     |
+      | Nome      | Valor | Entrega | Valor_total |
+      | Capuccino | 19,99 | 10,00   | 29,99       |
 
   @compra_sucesso
   Cenario: Compra bem sucedida

@@ -11,6 +11,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class starbugs_steps {
@@ -42,15 +45,28 @@ public class starbugs_steps {
         assertTrue(listaDeCafes.isDisplayed());
     }
 
-    @E("que desejo comprar o seguinte produto")
-    public void queDesejoComprarOSeguinteProduto(DataTable dataTable) {
-        System.out.println("Passei por aqui");
-    }
+    @Quando("desejo comprar o seguinte produto")
+    public void desejoComprarOSeguinteProduto(DataTable dataTable) throws InterruptedException {
+        List<Map<String, String>> produtos = dataTable.asMaps(String.class, String.class);
+        Thread.sleep(3000);
+        for (Map<String, String> produto : produtos) {
+            String nomeProduto = produto.get("Nome");
 
-    @Quando("inicio a compra desse item")
-    public void inicioACompraDesseItem() {
-        System.out.println("Passei por aqui");
+            // Localizando o elemento pelo nome do produto
+            WebElement produtoElement = navegadorStarbugs.findElement(By.xpath("//h1[contains(@class, 'coffee-name') and text()='" + nomeProduto + "']"));
 
+            // Validando o preço
+            String precoEsperado = produto.get("Preço");
+            WebElement precoElement = navegadorStarbugs.findElement(By.xpath("//strong[contains(@class, 'hblMil') and text()='" + precoEsperado + "']"));
+            String precoAtual = precoElement.getText();
+
+            // Localizando o botão de compra para o mesmo produto
+            WebElement botaoComprar = produtoElement.findElement(By.xpath("./following-sibling::div//button[contains(@class, 'buy-coffee')]"));
+
+            // Clicando no botão de compra
+            botaoComprar.click();
+
+        }
     }
 
     @Então("devo ver a página de Checkout com os detalhes do produto")
@@ -62,4 +78,5 @@ public class starbugs_steps {
     public void oValorTotalDaCompraDeveSerDe(String arg0) {
         System.out.println("Passei por aqui");
     }
+
 }
