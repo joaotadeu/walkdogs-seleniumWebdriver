@@ -183,7 +183,13 @@ public class starbugs_steps {
 
     @Então("devo ver um popup informando que o produto está indisponível com a mensagem {string}")
     public void devoVerUmPopupInformandoQueOProdutoEstaIndisponivelComAMensagem(String compraindisponivel) {
+        WebElement mensagemElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#swal2-html-container")));
 
+        // Obter o texto do elemento
+        String mensagem = mensagemElement.getText();
+
+        // Validar se o texto do elemento é igual ao texto esperado
+        Assert.assertEquals(compraindisponivel, mensagem);
 
     }
 

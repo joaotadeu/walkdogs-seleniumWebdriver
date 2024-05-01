@@ -20,8 +20,11 @@ Funcionalidade: Catálogo de cafés
     E o valor total da compra deve ser de '<Valor total>'
 
     Exemplos:
-      | Nome      | Valor | Entrega | Valor total |
-      | Capuccino | 19,99 | 10,00   | 29,99       |
+      | Nome                 | Valor | Entrega | Valor total |
+      | Capuccino            | 19,99 | 10,00   | 29,99       |
+      | Expresso Tradicional | 9,99  | 10,00   | 19,99       |
+
+
 
   @compra_sucesso
   Esquema do Cenario: Compra bem sucedida
