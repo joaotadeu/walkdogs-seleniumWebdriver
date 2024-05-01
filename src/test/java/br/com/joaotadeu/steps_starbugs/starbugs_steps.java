@@ -3,17 +3,21 @@ package br.com.joaotadeu.steps_starbugs;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +38,16 @@ public class starbugs_steps {
         System.out.println("Iniciando Teste...");
     }
 
-    @After
+    @After(order = 0)
     public void fecharNavegadorStarbugs(){
         navegadorStarbugs.quit();
         System.out.println("Finalizando Teste...");
+    }
+
+    @After(order = 1)
+    public void tirarPrintWalkdogs(Scenario cenario) throws IOException {
+        File file =  ((TakesScreenshot)navegadorStarbugs).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(file, new File("evidencias/screenshot/"+cenario.getId()+".jpg"));
     }
 
     @Dado("que estou na pagina principal da Starbugs")
