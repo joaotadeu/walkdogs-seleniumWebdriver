@@ -1,5 +1,6 @@
 #language: pt
 
+  @starbugs
 Funcionalidade: Catálogo de cafés
   Como um usuário do site, eu quero ver o catálogo de cafés na pagina principal
   Para que eu possa escolher e saber mais sobre os produtos disponíveis
@@ -47,9 +48,8 @@ Funcionalidade: Catálogo de cafés
 
   @compra_indisponivel
   Cenário: Café indisponível
-    Dado que estou na página principal da Starbugs
-    E que desejo comprar o seguinte produto:
-      | Nome              |
-      | Expresso Cremoso  |
-    Quando inicio a compra desse item
+    Dado que estou na pagina principal da Starbugs
+    Quando desejo comprar o seguinte produto
+      | Nome             | Preço |
+      | Expresso Cremoso | 9,99  |
     Então devo ver um popup informando que o produto está indisponível com a mensagem "Produto indisponível"

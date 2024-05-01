@@ -157,10 +157,8 @@ public class starbugs_steps {
 
     @Então("sou redirecionado para a página de confirmação de Pedidos e visualizo a mensagem {string}")
     public void souRedirecionadoParaAPaginaDeConfirmacaoDePedidosEVisualizoAMensagem(String pedidoConfirmado) {
-        WebElement confirmacaPedido = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("sc-cCjUiG iqMNCN container")));
-        assertTrue(confirmacaPedido.isDisplayed());
 
-        WebElement mensagemElement = navegadorStarbugs.findElement(By.xpath("//h1[contains(text(), '" + pedidoConfirmado + "')]"));
+        WebElement mensagemElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(), '" + pedidoConfirmado + "')]")));
 
         // Obter o texto do elemento
         String mensagem = mensagemElement.getText();
@@ -172,8 +170,6 @@ public class starbugs_steps {
 
     @E("deve ser informado o seguinte prazo de entrega: {string}")
     public void deveSerInformadoOSeguintePrazoDeEntrega(String prazoEntrega) {
-        WebElement previsaoEntrega = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("sc-cjibBx exBDHH")));
-        assertTrue(previsaoEntrega.isDisplayed());
 
         WebElement mensagemElement = navegadorStarbugs.findElement(By.xpath("//strong[contains(text(), '" + prazoEntrega +"' )]"));
 
@@ -185,20 +181,10 @@ public class starbugs_steps {
 
     }
 
-    @Dado("que estou na página principal da Starbugs")
-    public void queEstouNaPaginaPrincipalDaStarbugs() {
-    }
-
-    @E("que desejo comprar o seguinte produto:")
-    public void queDesejoComprarOSeguinteProduto() {
-    }
-
-    @Quando("inicio a compra desse item")
-    public void inicioACompraDesseItem() {
-    }
-
     @Então("devo ver um popup informando que o produto está indisponível com a mensagem {string}")
-    public void devoVerUmPopupInformandoQueOProdutoEstaIndisponivelComAMensagem(String arg0) {
+    public void devoVerUmPopupInformandoQueOProdutoEstaIndisponivelComAMensagem(String compraindisponivel) {
+
+
     }
 
 }
