@@ -172,6 +172,17 @@ public class starbugs_steps {
 
     @E("deve ser informado o seguinte prazo de entrega: {string}")
     public void deveSerInformadoOSeguintePrazoDeEntrega(String prazoEntrega) {
+        WebElement previsaoEntrega = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("sc-cjibBx exBDHH")));
+        assertTrue(previsaoEntrega.isDisplayed());
+
+        WebElement mensagemElement = navegadorStarbugs.findElement(By.xpath("//strong[contains(text(), '" + prazoEntrega +"' )]"));
+
+        // Obter o texto do elemento
+        String mensagem = mensagemElement.getText();
+
+        // Validar se o texto do elemento é igual ao texto esperado
+        Assert.assertEquals(prazoEntrega, mensagem);
+
     }
 
     @Dado("que estou na página principal da Starbugs")
