@@ -156,11 +156,22 @@ public class starbugs_steps {
     }
 
     @Então("sou redirecionado para a página de confirmação de Pedidos e visualizo a mensagem {string}")
-    public void souRedirecionadoParaAPaginaDeConfirmacaoDePedidosEVisualizoAMensagem(String arg0) {
+    public void souRedirecionadoParaAPaginaDeConfirmacaoDePedidosEVisualizoAMensagem(String pedidoConfirmado) {
+        WebElement confirmacaPedido = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("sc-cCjUiG iqMNCN container")));
+        assertTrue(confirmacaPedido.isDisplayed());
+
+        WebElement mensagemElement = navegadorStarbugs.findElement(By.xpath("//h1[contains(text(), '" + pedidoConfirmado + "')]"));
+
+        // Obter o texto do elemento
+        String mensagem = mensagemElement.getText();
+
+        // Validar se o texto do elemento é igual ao texto esperado
+        Assert.assertEquals(pedidoConfirmado, mensagem);
+
     }
 
     @E("deve ser informado o seguinte prazo de entrega: {string}")
-    public void deveSerInformadoOSeguintePrazoDeEntrega(String arg0) {
+    public void deveSerInformadoOSeguintePrazoDeEntrega(String prazoEntrega) {
     }
 
     @Dado("que estou na página principal da Starbugs")
