@@ -1,4 +1,4 @@
-package br.com.joaotadeu.steps_starbugs;
+package br.com.joaotadeu.steps.steps_starbugs;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;

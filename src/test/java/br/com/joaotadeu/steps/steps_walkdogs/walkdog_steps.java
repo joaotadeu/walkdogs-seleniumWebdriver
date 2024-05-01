@@ -1,4 +1,4 @@
-package br.com.joaotadeu.steps_walkdogs;
+package br.com.joaotadeu.steps.steps_walkdogs;
 
 import io.cucumber.java.After;
 
