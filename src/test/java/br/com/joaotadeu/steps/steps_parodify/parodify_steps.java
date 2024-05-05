@@ -97,21 +97,26 @@ public class parodify_steps {
 
     @Quando("verifico que as playlists estão visiveis")
     public void verificoQueAsPlaylistsEstaoVisiveis() {
-    }
-
-    @Então("valido que as playlists estão sendo exibidas na plataforma")
-    public void validoQueAsPlaylistsEstaoSendoExibidasNaPlataforma() {
+        WebElement parodifyHomepage = navegadorParodify.findElement(By.cssSelector(".mx-6"));
+        assertTrue(parodifyHomepage.isDisplayed());
     }
 
     @Quando("vou interagir com o botão playlist")
     public void vouInteragirComOBotaoPlaylist() {
+        navegadorParodify.findElement(By.cssSelector("nav.mt-6 > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)")).click();
     }
 
     @Então("valido interação com susceso")
     public void validoInteracaoComSusceso() {
+        WebElement parodifyHomepage = navegadorParodify.findElement(By.cssSelector("nav.mt-6 > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)"));
+        assertTrue(parodifyHomepage.isDisplayed());
     }
 
     @Quando("vou interagir com o botão favoritos")
     public void vouInteragirComOBotaoFavoritos() {
+        navegadorParodify.findElement(By.cssSelector(".bg-gradient-to-br")).click();
+
+        WebElement parodifyHomepage = navegadorParodify.findElement(By.cssSelector("nav.mt-6 > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)"));
+        assertTrue(parodifyHomepage.isDisplayed());
     }
 }

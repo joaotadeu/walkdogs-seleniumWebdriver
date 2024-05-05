@@ -1,6 +1,6 @@
 #language: pt
 
-@starbugs
+@Parodify
 Funcionalidade: Catálogo de musicas na plataforma Parodify
   Como usuario do site quero buscar sobre alguma musica determinada pela exibição do site
   para que eu possa buscar as musicas e interagir com elas
@@ -54,14 +54,11 @@ Funcionalidade: Catálogo de musicas na plataforma Parodify
     Cenário: Acessar pagina do Parodify
              Efetuar busca com sucesso
              interagir com os itens de reprodução em tela
+
     Dado que estou na página principal do Parodify
     Quando verifico que as playlists estão visiveis
-      | Playlist     |
-      | Back in Test |
-    Então valido que as playlists estão sendo exibidas na plataforma
 
-
-    @validando_playlist
+    @validando_botao_playlist
     Cenário: Acessar pagina do Parodify
              Interagir com botão playlist
 
