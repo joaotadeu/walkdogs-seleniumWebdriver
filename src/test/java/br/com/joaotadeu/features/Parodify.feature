@@ -12,13 +12,18 @@ Funcionalidade: Catálogo de musicas na plataforma Parodify
 
     Dado que estou na página principal do Parodify
     Quando efetuo a busca referente as musicas apresentadas na plataforma
-      | Musicas              |
-      | <titulo das Musicas> |
+      | Titulo das Musicas   |
+      | <Titulo das Musicas> |
     Então valido que a busca foi feita com sucesso
 
     Exemplos:
-      | Titulo das Musicas|
-      | Bughium           |
+      | Titulo das Musicas      |
+      | Bughium                 |
+      | Nice Bugs Finish Devs   |
+      | Bug Suede Shoes         |
+      | All The Small Sprints   |
+      | The Devs Aren't Alright |
+      | Symphony of Production  |
 
     @validação_home
     Cenário: Acessar pagina do Parodify
