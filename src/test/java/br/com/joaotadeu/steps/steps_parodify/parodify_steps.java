@@ -81,15 +81,18 @@ public class parodify_steps {
 
     @Então("vou interagir com o botão play")
     public void vouInteragirComOBotaoPlay() {
-        
+        navegadorParodify.findElement(By.cssSelector("button.play:nth-child(3)")).click();
     }
 
     @E("vou interagir com o botão mute")
     public void vouInteragirComOBotaoMute() {
+        navegadorParodify.findElement(By.cssSelector("div.min-w-\\[11\\.25rem\\]:nth-child(3) > button:nth-child(4)")).click();
     }
 
     @E("validar que a funcionalidade esta de acordo")
     public void validarQueAFuncionalidadeEstaDeAcordo() {
+        WebElement parodifyHomepage = navegadorParodify.findElement(By.id("root"));
+        assertTrue(parodifyHomepage.isDisplayed());
     }
 
     @Quando("verifico que as playlists estão visiveis")
