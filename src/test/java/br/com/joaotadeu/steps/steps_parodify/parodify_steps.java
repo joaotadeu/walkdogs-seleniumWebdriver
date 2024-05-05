@@ -69,12 +69,14 @@ public class parodify_steps {
 
     @Então("vou interagir com o botão home")
     public void vouInteragirComOBotaoHome() {
-        
+        navegadorParodify.findElement(By.cssSelector(".bg-active")).click();
     }
 
     @E("validar que foi direcionado para página principal do Parodify")
     public void validarQueFoiDirecionadoParaPaginaPrincipalDoParodify() {
-        
+        WebDriverWait wait = new WebDriverWait(navegadorParodify, Duration.ofSeconds(10));
+        WebElement parodifyBusca = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".px-8")));
+        assertTrue(parodifyBusca.isDisplayed());
     }
 
     @Então("vou interagir com o botão play")

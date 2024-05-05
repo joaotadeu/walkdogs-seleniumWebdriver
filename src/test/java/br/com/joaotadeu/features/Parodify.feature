@@ -32,8 +32,8 @@ Funcionalidade: Catálogo de musicas na plataforma Parodify
 
     Dado que estou na página principal do Parodify
     Quando efetuo a busca referente as musicas apresentadas na plataforma
-      | Musicas              |
-      | <titulo das Musicas> |
+      | Titulo das Musicas |
+      | Bughium            |
     Então vou interagir com o botão home
       E validar que foi direcionado para página principal do Parodify
 
