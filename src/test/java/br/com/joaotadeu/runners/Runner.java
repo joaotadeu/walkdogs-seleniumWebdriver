@@ -6,10 +6,10 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/java/br/com/joaotadeu/features/Parodify.feature",
-        glue = "br.com.joaotadeu.steps.steps_parodify",
+        features = "src/test/java/br/com/joaotadeu/features/Login_qax.feature",
+        glue = "br.com.joaotadeu.steps.steps_login_qax",
         plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"},
-        tags = "@validando_favoritos"
+        tags = "@login_sem_sucesso"
 )
 public class Runner {
 
