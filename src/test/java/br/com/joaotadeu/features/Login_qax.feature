@@ -14,18 +14,17 @@
       | usuario   | senha   |
       | <usuario> | <senha> |
     Então valido que a resposta do sistema está de acordo com a validação verificada
+      | mensagem_esperada   |
+      | <mensagem_esperada> |
 
     Exemplos:
-      | usuario | senha |
-      | teste   |       |
-      |         | 123   |
-      | teste   | 123   |
-
+      | usuario | senha | mensagem_esperada              |
+      | teste   |       | Informe a sua senha secreta!   |
+      |         | 123   | Informe o seu nome de usuário! |
+      | teste   | 123   | Oops! Credenciais inválidas :( |
 
     @Login_com_sucesso
     Cenário: Como usuario vou validar o sucesso no login da aplicação
       Dados que estou na página de login no portal QAX
-      Quando Preencho as credencias do usuario:
-        | usuario | senha     |
-        | qa      | xperience |
+      Quando Preencho as credencias do usuario "qa" e senha "xperience"
       Então valido que o usuario foi logado com sucesso

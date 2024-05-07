@@ -55,7 +55,7 @@ public class parodify_steps {
 
         WebElement tituloMusicas = navegadorParodify.findElement(By.id("search-input"));
 
-        tituloMusicas.sendKeys(listaMusicas.get(0).get("Titulo das Musicas")); // Observe que estamos usando o nome correto da coluna
+        tituloMusicas.sendKeys(listaMusicas.get(0).get("Titulo das Musicas"));
         navegadorParodify.findElement(By.cssSelector("button[class='ml-4']")).click();
     }
 
