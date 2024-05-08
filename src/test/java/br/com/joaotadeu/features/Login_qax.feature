@@ -18,10 +18,10 @@
       | <mensagem_esperada> |
 
     Exemplos:
-      | usuario | senha | mensagem_esperada              |
-      | teste   |       | Informe a sua senha secreta!   |
-      |         | 123   | Informe o seu nome de usuário! |
-      | teste   | 123   | Oops! Credenciais inválidas :( |
+      | usuario | senha   | mensagem_esperada              |
+      | teste   | [empty] | Informe a sua senha secreta!   |
+      | [empty] | teste   | Informe o seu nome de usuário! |
+      | teste   | 123     | Oops! Credenciais inválidas :( |
 
     @Login_com_sucesso
     Cenário: Como usuario vou validar o sucesso no login da aplicação
