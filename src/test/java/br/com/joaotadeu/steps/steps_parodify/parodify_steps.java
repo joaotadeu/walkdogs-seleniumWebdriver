@@ -1,16 +1,15 @@
 package br.com.joaotadeu.steps.steps_parodify;
 
+import br.com.joaotadeu.DriverFactory.DriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,16 +26,13 @@ public class parodify_steps {
 
     @Before
     public void setUpParodify(){
-        // Configuração do navegador
-        WebDriverManager.firefoxdriver().setup();
-        navegadorParodify = new FirefoxDriver();
-        //wait = new WebDriverWait(navegadorParodify, Duration.ofSeconds(10));
+        navegadorParodify = DriverFactory.getDriver();
         System.out.println("Iniciando Teste...");
     }
 
     @After
     public void fecharNavegadorStarbugs(){
-        navegadorParodify.quit();
+        DriverFactory.KillDriver();
         System.out.println("Finalizando Teste...");
     }
 
