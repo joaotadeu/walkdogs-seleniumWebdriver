@@ -87,9 +87,7 @@ public class qax_login_steps {
 
     @Então("valido que o usuario foi logado com sucesso")
     public void validoQueOUsuarioFoiLogadoComSucesso() {
-
         WebElement mensagemBoasVindas = navegadorQAX.findElement(By.cssSelector(".swal2-popup"));
-
         Assert.assertTrue(mensagemBoasVindas.isDisplayed());
     }
 
