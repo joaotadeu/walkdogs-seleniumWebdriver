@@ -55,42 +55,25 @@ public class qax_login_steps {
         String usuario = usuarios.get(0).get("usuario");
         String senha = usuarios.get(0).get("senha");
 
-        WebElement usuarioElemento = navegadorQAX.findElement(By.cssSelector("input[name=user]"));
-        WebElement senhaElemento = navegadorQAX.findElement((By.cssSelector("input[name=pass]")));
-
-        // Verifica se o usuário é marcado como "[empty]" e limpa o campo de usuário
-        if ("[empty]".equals(usuario)) {
-            usuarioElemento.clear();
-        } else {
-            usuarioElemento.sendKeys(usuario);
-        }
-
-        // Verifica se a senha é marcada como "[empty]" e limpa o campo de senha
-        if ("[empty]".equals(senha)) {
-            senhaElemento.clear();
-        } else {
-            senhaElemento.sendKeys(senha);
-        }
-
-        navegadorQAX.findElement(By.cssSelector("button[type=button]")).click();
+        paginaQAX.preencherUsuario(usuario);
+        paginaQAX.preencherSenha(senha);
+        paginaQAX.clicarBotaoLogin();
     }
 
 
     @Então("valido que a resposta do sistema está de acordo com a validação verificada")
     public void valido_que_a_resposta_do_sistema_está_de_acordo_com_a_validação_verificada(DataTable dataTable) {
-
         List<Map<String, String>> mensagemEsperadaLis = dataTable.asMaps(String.class, String.class);
 
         WebDriverWait wait = new WebDriverWait(navegadorQAX, Duration.ofSeconds(10)); // Defina a duração explicitamente
-
-        WebElement toast = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".App > div:nth-child(2) > div:nth-child(1)")));
-
-        String textoExibido = toast.getText().trim();
+        paginaQAX.aguardarToast();
+        String textoExibido = paginaQAX.obterTextoToast();
 
         for (Map<String, String> row : mensagemEsperadaLis) {
             String mensagemEsperada = row.get("mensagem_esperada");
             assertEquals(mensagemEsperada, textoExibido);
         }
+
     }
 
     @Quando("Preencho as credencias do usuario {string} e senha {string}")
