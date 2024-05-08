@@ -11,6 +11,7 @@ import java.time.Duration;
 public class qax_login_page {
 
     private WebDriver navegadorDriver;
+    private WebDriverWait wait;
 
     public qax_login_page(WebDriver driver) {
         this.navegadorDriver = driver;
@@ -49,5 +50,15 @@ public class qax_login_page {
     public String obterTextoToast() {
         WebElement toast = navegadorDriver.findElement(By.cssSelector(".App > div:nth-child(2) > div:nth-child(1)"));
         return toast.getText().trim();
+    }
+
+    public void preencherUsuarios(String usuario) {
+        WebElement usuarioElemento = navegadorDriver.findElement(By.cssSelector("input[name=user]"));
+        usuarioElemento.sendKeys(usuario);
+    }
+
+    public void preencherSenhas(String senha) {
+        WebElement senhaElemento = navegadorDriver.findElement((By.cssSelector("input[name=pass]")));
+        senhaElemento.sendKeys(senha);
     }
 }

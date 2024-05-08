@@ -23,7 +23,7 @@
       | [empty] | teste   | Informe o seu nome de usuário! |
       | teste   | 123     | Oops! Credenciais inválidas :( |
 
-    @Login_com_sucesso
+    @login_com_sucesso
     Cenário: Como usuario vou validar o sucesso no login da aplicação
       Dados que estou na página de login no portal QAX
       Quando Preencho as credencias do usuario "qa" e senha "xperience"

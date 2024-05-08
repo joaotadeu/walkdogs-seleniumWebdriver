@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
         features = "src/test/java/br/com/joaotadeu/features/Login_qax.feature",
         glue = "br.com.joaotadeu.steps.steps_login_qax",
         plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"},
-        tags = "@login_sem_sucesso"
+        tags = "@login_com_sucesso"
 )
 public class Runner {
 

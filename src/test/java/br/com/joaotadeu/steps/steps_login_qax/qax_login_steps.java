@@ -12,7 +12,6 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -66,7 +65,9 @@ public class qax_login_steps {
         List<Map<String, String>> mensagemEsperadaLis = dataTable.asMaps(String.class, String.class);
 
         WebDriverWait wait = new WebDriverWait(navegadorQAX, Duration.ofSeconds(10)); // Defina a duração explicitamente
+
         paginaQAX.aguardarToast();
+
         String textoExibido = paginaQAX.obterTextoToast();
 
         for (Map<String, String> row : mensagemEsperadaLis) {
@@ -78,13 +79,9 @@ public class qax_login_steps {
 
     @Quando("Preencho as credencias do usuario {string} e senha {string}")
     public void preenchoAsCredenciasDoUsuarioESenha(String usuario, String senha) {
-        WebElement usuarioElemento = navegadorQAX.findElement(By.cssSelector("input[name=user]"));
-        WebElement senhaElemento = navegadorQAX.findElement((By.cssSelector("input[name=pass]")));
-
-        usuarioElemento.sendKeys(usuario);
-        senhaElemento.sendKeys(senha);
-
-        navegadorQAX.findElement(By.cssSelector("button[type=button]")).click();
+        paginaQAX.preencherUsuarios(usuario);
+        paginaQAX.preencherSenhas(senha);
+        paginaQAX.clicarBotaoLogin();
     }
 
 
