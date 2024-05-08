@@ -1,17 +1,16 @@
 package br.com.joaotadeu.steps.steps_login_qax;
 
+import br.com.joaotadeu.DriverFactory.DriverFactory;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -28,15 +27,13 @@ public class qax_login_steps {
 
     @Before
     public void setUpQAX(){
-        // Configuração do navegador
-        WebDriverManager.firefoxdriver().setup();
-        navegadorQAX = new FirefoxDriver();
+        navegadorQAX = DriverFactory.getDriver();
         System.out.println("Iniciando Teste...");
     }
 
     @After
     public void fecharNavegadorStarbugs(){
-        navegadorQAX.quit();
+        DriverFactory.KillDriver();
         System.out.println("Finalizando Teste...");
     }
 
