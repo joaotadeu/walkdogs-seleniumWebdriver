@@ -1,5 +1,6 @@
 package br.com.joaotadeu.steps.steps_walkdogs;
 
+import br.com.joaotadeu.DriverFactory.DriverFactory;
 import io.cucumber.java.After;
 
 import io.cucumber.java.Before;
@@ -8,12 +9,10 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -30,9 +29,7 @@ public class walkdog_steps {
 
     @Before
     public void setUpWalkdogs(){
-        //Configuração do navegador
-        WebDriverManager.firefoxdriver().setup();
-        navegadorWalkdogs = new FirefoxDriver();
+        navegadorWalkdogs = DriverFactory.getDriver();
         System.out.println("Iniciando Teste...");
 
     }
