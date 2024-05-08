@@ -1,6 +1,7 @@
 package br.com.joaotadeu.steps.steps_login_qax;
 
 import br.com.joaotadeu.DriverFactory.DriverFactory;
+import br.com.joaotadeu.pages.qax_login_page;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -24,10 +25,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class qax_login_steps {
 
     private WebDriver navegadorQAX;
+    private qax_login_page paginaQAX;
 
     @Before
     public void setUpQAX(){
         navegadorQAX = DriverFactory.getDriver();
+        paginaQAX = new qax_login_page(navegadorQAX);
         System.out.println("Iniciando Teste...");
     }
 
@@ -39,7 +42,7 @@ public class qax_login_steps {
 
     @Dado("que estou na página de login no portal QAX")
     public void que_estou_na_página_de_login_no_portal_qax() {
-        navegadorQAX.get("https://loginxp.vercel.app/");
+        paginaQAX.acessarPaginaQAX();
 
         WebElement QAXHomepage = navegadorQAX.findElement(By.cssSelector(".App-header"));
         assertTrue(QAXHomepage.isDisplayed());
