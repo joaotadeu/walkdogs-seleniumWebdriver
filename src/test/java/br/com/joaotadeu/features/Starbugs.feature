@@ -24,8 +24,6 @@ Funcionalidade: Catálogo de cafés
       | Capuccino            | 19,99 | 10,00   | 29,99       |
       | Expresso Tradicional | 9,99  | 10,00   | 19,99       |
 
-
-
   @compra_sucesso
   Esquema do Cenario: Compra bem sucedida
     Dado que estou na pagina principal da Starbugs

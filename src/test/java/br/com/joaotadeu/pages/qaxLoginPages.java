@@ -8,12 +8,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class qax_login_page {
+public class qaxLoginPages {
 
     private WebDriver navegadorDriver;
     private WebDriverWait wait;
 
-    public qax_login_page(WebDriver driver) {
+    public qaxLoginPages(WebDriver driver) {
         this.navegadorDriver = driver;
     }
 

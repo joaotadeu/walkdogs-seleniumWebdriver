@@ -1,7 +1,7 @@
 package br.com.joaotadeu.steps.steps_login_qax;
 
 import br.com.joaotadeu.DriverFactory.DriverFactory;
-import br.com.joaotadeu.pages.qax_login_page;
+import br.com.joaotadeu.pages.qaxLoginPages;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -24,18 +24,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class qax_login_steps {
 
     private WebDriver navegadorQAX;
-    private qax_login_page paginaQAX;
+    private qaxLoginPages paginaQAX;
 
     @Before
     public void setUpQAX(){
         navegadorQAX = DriverFactory.getDriver();
-        paginaQAX = new qax_login_page(navegadorQAX);
+        paginaQAX = new qaxLoginPages(navegadorQAX);
         System.out.println("Iniciando Teste...");
     }
 
     @After
     public void fecharNavegadorStarbugs(){
-        DriverFactory.KillDriver();
+        DriverFactory.killDriver();
         System.out.println("Finalizando Teste...");
     }
 

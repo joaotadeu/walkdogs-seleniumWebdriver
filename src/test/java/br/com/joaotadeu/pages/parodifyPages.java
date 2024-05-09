@@ -7,12 +7,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class parodifyPage {
+public class parodifyPages {
 
     private WebDriverWait wait;
     private WebDriver navegadorDriver;
 
-    public parodifyPage(WebDriver driver) {
+    public parodifyPages(WebDriver driver) {
         this.navegadorDriver = driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }

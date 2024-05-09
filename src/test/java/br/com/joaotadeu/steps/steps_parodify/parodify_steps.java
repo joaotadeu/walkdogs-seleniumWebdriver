@@ -1,7 +1,7 @@
 package br.com.joaotadeu.steps.steps_parodify;
 
 import br.com.joaotadeu.DriverFactory.DriverFactory;
-import br.com.joaotadeu.pages.parodifyPage;
+import br.com.joaotadeu.pages.parodifyPages;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -25,19 +25,19 @@ public class parodify_steps {
 
     private WebDriver navegadorParodify;
     private WebDriverWait wait;
-    private parodifyPage parodifyPage;
+    private parodifyPages parodifyPage;
 
     @Before
     public void setUpParodify(){
         navegadorParodify = DriverFactory.getDriver();
-        parodifyPage = new parodifyPage(navegadorParodify);
+        parodifyPage = new parodifyPages(navegadorParodify);
         System.out.println("Iniciando Teste...");
 
     }
 
     @After
     public void fecharNavegadorStarbugs(){
-        DriverFactory.KillDriver();
+        DriverFactory.killDriver();
         System.out.println("Finalizando Teste...");
     }
 
@@ -63,7 +63,6 @@ public class parodify_steps {
             WebElement parodifyBusca = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cover")));
             assertTrue(parodifyBusca.isDisplayed());
         } catch (StaleElementReferenceException e) {
-            // Se ocorrer exceção, tentar localizar o elemento novamente
             WebDriverWait wait = new WebDriverWait(navegadorParodify, Duration.ofSeconds(10));
             WebElement parodifyBusca = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cover")));
             assertTrue(parodifyBusca.isDisplayed());
