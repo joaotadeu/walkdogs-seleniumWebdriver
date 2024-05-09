@@ -99,7 +99,7 @@ public class starbugsPages {
 
     public String obterPrazoEntrega() {
         // Este seletor deve ser ajustado para corresponder ao elemento correto na página
-        WebElement prazoEntregaElement = driver.findElement(By.xpath("//strong[contains(text(), 'prazo')]"));
+        WebElement prazoEntregaElement = driver.findElement(By.xpath("//strong[contains(text(), '20 min - 30 min')]"));
         return prazoEntregaElement.getText();
     }
 
