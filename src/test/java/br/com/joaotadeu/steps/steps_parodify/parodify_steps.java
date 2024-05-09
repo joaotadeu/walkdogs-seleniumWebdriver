@@ -9,6 +9,7 @@ import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -57,10 +58,17 @@ public class parodify_steps {
 
     @Então("valido que a busca foi feita com sucesso")
     public void valido_que_a_busca_foi_feita_com_sucesso() {
-        WebDriverWait wait = new WebDriverWait(navegadorParodify, Duration.ofSeconds(10));
-        WebElement parodifyBusca = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cover")));
-        assertTrue(parodifyBusca.isDisplayed());
+        try {
+            WebDriverWait wait = new WebDriverWait(navegadorParodify, Duration.ofSeconds(10));
+            WebElement parodifyBusca = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cover")));
+            assertTrue(parodifyBusca.isDisplayed());
+        } catch (StaleElementReferenceException e) {
+            // Se ocorrer exceção, tentar localizar o elemento novamente
+            WebDriverWait wait = new WebDriverWait(navegadorParodify, Duration.ofSeconds(10));
+            WebElement parodifyBusca = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cover")));
+            assertTrue(parodifyBusca.isDisplayed());
 
+        }
     }
 
 

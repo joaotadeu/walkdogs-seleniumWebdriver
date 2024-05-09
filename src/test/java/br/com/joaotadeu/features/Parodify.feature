@@ -42,21 +42,21 @@ Funcionalidade: Catálogo de musicas na plataforma Parodify
              Efetuar busca com sucesso
              interagir com os itens de reprodução em tela
 
-    Dado que estou na página principal do Parodify
-      Quando efetuo a busca referente as musicas apresentadas na plataforma
+     Dado que estou na página principal do Parodify
+     Quando efetuo a busca referente as musicas apresentadas na plataforma
         | Titulo das Musicas |
         | Bughium            |
-    Então vou interagir com o botão play
-      E vou interagir com o botão mute
-      E validar que a funcionalidade esta de acordo
+     Então vou interagir com o botão play
+        E vou interagir com o botão mute
+        E validar que a funcionalidade esta de acordo
 
     @validar_playlists
     Cenário: Acessar pagina do Parodify
              Efetuar busca com sucesso
              interagir com os itens de reprodução em tela
 
-    Dado que estou na página principal do Parodify
-    Quando verifico que as playlists estão visiveis
+      Dado que estou na página principal do Parodify
+      Quando verifico que as playlists estão visiveis
 
     @validando_botao_playlist
     Cenário: Acessar pagina do Parodify
@@ -74,4 +74,3 @@ Funcionalidade: Catálogo de musicas na plataforma Parodify
       Dado que estou na página principal do Parodify
       Quando vou interagir com o botão favoritos
       Então valido interação com susceso
-

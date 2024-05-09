@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
         features = "src/test/java/br/com/joaotadeu/features/Parodify.feature",
         glue = "br.com.joaotadeu.steps.steps_parodify",
         plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"},
-        tags = "@funcionamento_reproducao"
+        tags = "@Parodify"
 )
 public class Runner {
 
