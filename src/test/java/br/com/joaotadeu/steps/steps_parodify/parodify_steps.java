@@ -1,6 +1,7 @@
 package br.com.joaotadeu.steps.steps_parodify;
 
 import br.com.joaotadeu.DriverFactory.DriverFactory;
+import br.com.joaotadeu.pages.parodifyPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
@@ -23,10 +24,12 @@ public class parodify_steps {
 
     private WebDriver navegadorParodify;
     private WebDriverWait wait;
+    private parodifyPage parodifyPage;
 
     @Before
     public void setUpParodify(){
         navegadorParodify = DriverFactory.getDriver();
+        parodifyPage = new parodifyPage(navegadorParodify);
         System.out.println("Iniciando Teste...");
     }
 
@@ -38,11 +41,7 @@ public class parodify_steps {
 
     @Dado("que estou na página principal do Parodify")
     public void que_estou_na_página_principal_do_parodify() {
-        navegadorParodify.get("https://parodify.vercel.app/");
-
-        WebElement parodifyHomepage = navegadorParodify.findElement(By.id("root"));
-        assertTrue(parodifyHomepage.isDisplayed());
-
+        parodifyPage.acessarParodify();
     }
 
     @Quando("efetuo a busca referente as musicas apresentadas na plataforma")
