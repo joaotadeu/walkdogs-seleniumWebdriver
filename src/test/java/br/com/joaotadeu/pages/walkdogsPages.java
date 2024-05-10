@@ -1,5 +1,6 @@
 package br.com.joaotadeu.pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Map;
 
 public class walkdogsPages {
     public static class WalkdogsHomePage {
@@ -37,6 +39,10 @@ public class walkdogsPages {
             driver.findElement(By.name("addressNumber")).sendKeys(numero);
             driver.findElement(By.name("addressDetails")).sendKeys(complemento);
             driver.findElement(By.cssSelector("input[type='button']")).click();
+        }
+
+        public void tentativaCadastro() {
+            driver.findElement(By.cssSelector(".button-register")).click();
         }
 
         public void escolherAtividadeExtra(String atividade) {
@@ -77,10 +83,36 @@ public class walkdogsPages {
             }
         }
 
-
         public String obterMensagemErro(String campo) {
             String campoLocator = String.format("div.field-group > div:contains('%s') > span", campo);
             return driver.findElement(By.cssSelector(campoLocator)).getText();
+        }
+
+        public void validarMensagensDeErro(Map<String, String> dados) {
+            // Encontrar e validar a mensagem de erro para o campo Nome Completo
+            WebElement nomeErrorElement = driver.findElement(By.cssSelector("#page-walker > form:nth-child(2) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) > span:nth-child(2)"));
+            String nomeErrorMessage = nomeErrorElement.getText();
+            Assert.assertEquals(dados.get("Nome Completo"), nomeErrorMessage);
+
+            // Encontrar e validar a mensagem de erro para o campo E-mail
+            WebElement emailErrorElement = driver.findElement(By.cssSelector("div.field-group:nth-child(3) > div:nth-child(1) > span:nth-child(2)"));
+            String emailErrorMessage = emailErrorElement.getText();
+            Assert.assertEquals(dados.get("E-mail"), emailErrorMessage);
+
+            // Encontrar e validar a mensagem de erro para o campo CPF
+            WebElement cpfErrorElement = driver.findElement(By.cssSelector("div.field-group:nth-child(3) > div:nth-child(2) > span:nth-child(2)"));
+            String cpfErrorMessage = cpfErrorElement.getText();
+            Assert.assertEquals(dados.get("CPF"), cpfErrorMessage);
+
+            // Encontrar e validar a mensagem de erro para o campo Número
+            WebElement numeroErrorElement = driver.findElement(By.cssSelector("div.field-group:nth-child(4) > div:nth-child(1) > span:nth-child(2)"));
+            String numeroErrorMessage = numeroErrorElement.getText();
+            Assert.assertEquals(dados.get("Número"), numeroErrorMessage);
+
+            // Encontrar e validar a mensagem de erro para o campo Documento
+            WebElement documentoErrorElement = driver.findElement(By.cssSelector("span.alert-error:nth-child(7)"));
+            String documentoErrorMessage = documentoErrorElement.getText();
+            Assert.assertEquals(dados.get("Documento"), documentoErrorMessage);
         }
     }
 }

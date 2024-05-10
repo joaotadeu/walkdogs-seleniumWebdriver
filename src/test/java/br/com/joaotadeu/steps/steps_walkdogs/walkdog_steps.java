@@ -3,6 +3,7 @@ package br.com.joaotadeu.steps.steps_walkdogs;
 import br.com.joaotadeu.DriverFactory.DriverFactory;
 import br.com.joaotadeu.pages.walkdogsPages.CadastroParceiroPage;
 import br.com.joaotadeu.pages.walkdogsPages.WalkdogsHomePage;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -89,16 +90,12 @@ public class walkdog_steps {
 
     @Quando("tento cadastrar um parceiro sem preencher os campos obrigatórios")
     public void tentoCadastrarUmParceiroSemPreencherOsCamposObrigatorios() {
-        cadastroPage.preencherDadosPessoais("", "", "", "", "", "");
-        cadastroPage.fazerUploadDocumento("");
+        cadastroPage.tentativaCadastro();
     }
 
     @Então("devo ver uma mensagem de erro informando que os campos obrigatórios não foram preenchidos")
-    public void devo_ver_uma_mensagem_de_erro_informando_que_os_campos_obrigatórios_não_foram_preenchidos(io.cucumber.datatable.DataTable dataTable) {
+    public void devo_ver_uma_mensagem_de_erro_informando_que_os_campos_obrigatórios_não_foram_preenchidos(DataTable dataTable) {
         List<Map<String, String>> dados = dataTable.asMaps(String.class, String.class);
-        for (Map<String, String> campo : dados) {
-            String mensagemErro = cadastroPage.obterMensagemErro(campo.get("Documento"));
-            Assert.assertEquals(campo.get("Nome Completo"), mensagemErro);
-        }
+        cadastroPage.validarMensagensDeErro(dados.get(0));
     }
 }
