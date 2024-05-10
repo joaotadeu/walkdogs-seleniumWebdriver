@@ -48,15 +48,15 @@ public class walkdogsPages {
         public void escolherAtividadeExtra(String atividade) {
             switch (atividade.toLowerCase()) {
                 case "cuidar":
-                    // Lógica para selecionar a atividade "cuidar"
+
                     driver.findElement(By.cssSelector(".walker-service > li:nth-child(1) > span:nth-child(2)")).click();
                     break;
                 case "adestrar":
-                    // Lógica para selecionar a atividade "adestrar"
+
                     driver.findElement(By.cssSelector(".walker-service > li:nth-child(2) > span:nth-child(2)")).click();
                     break;
                 default:
-                    // Tratamento para tipos de atividade inválidos
+
                     System.out.println("Tipo de atividade extra inválido: " + atividade);
                     break;
             }
@@ -68,17 +68,15 @@ public class walkdogsPages {
         }
 
         public String obterMensagem() {
-            // Defina um tempo limite para a espera explícita
+
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
             try {
-                // Aguarde até que o elemento seja visível na página
                 WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("swal2-html-container")));
 
-                // Uma vez que o elemento é visível, retorne seu texto
                 return elemento.getText();
             } catch (Exception e) {
-                // Se ocorrer uma exceção (por exemplo, elemento não encontrado), retorne uma mensagem de erro
+
                 return "Elemento com ID 'swal2-html-container' não encontrado.";
             }
         }
@@ -89,27 +87,27 @@ public class walkdogsPages {
         }
 
         public void validarMensagensDeErro(Map<String, String> dados) {
-            // Encontrar e validar a mensagem de erro para o campo Nome Completo
+
             WebElement nomeErrorElement = driver.findElement(By.cssSelector("#page-walker > form:nth-child(2) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) > span:nth-child(2)"));
             String nomeErrorMessage = nomeErrorElement.getText();
             Assert.assertEquals(dados.get("Nome Completo"), nomeErrorMessage);
 
-            // Encontrar e validar a mensagem de erro para o campo E-mail
+
             WebElement emailErrorElement = driver.findElement(By.cssSelector("div.field-group:nth-child(3) > div:nth-child(1) > span:nth-child(2)"));
             String emailErrorMessage = emailErrorElement.getText();
             Assert.assertEquals(dados.get("E-mail"), emailErrorMessage);
 
-            // Encontrar e validar a mensagem de erro para o campo CPF
+
             WebElement cpfErrorElement = driver.findElement(By.cssSelector("div.field-group:nth-child(3) > div:nth-child(2) > span:nth-child(2)"));
             String cpfErrorMessage = cpfErrorElement.getText();
             Assert.assertEquals(dados.get("CPF"), cpfErrorMessage);
 
-            // Encontrar e validar a mensagem de erro para o campo Número
+
             WebElement numeroErrorElement = driver.findElement(By.cssSelector("div.field-group:nth-child(4) > div:nth-child(1) > span:nth-child(2)"));
             String numeroErrorMessage = numeroErrorElement.getText();
             Assert.assertEquals(dados.get("Número"), numeroErrorMessage);
 
-            // Encontrar e validar a mensagem de erro para o campo Documento
+
             WebElement documentoErrorElement = driver.findElement(By.cssSelector("span.alert-error:nth-child(7)"));
             String documentoErrorMessage = documentoErrorElement.getText();
             Assert.assertEquals(dados.get("Documento"), documentoErrorMessage);
