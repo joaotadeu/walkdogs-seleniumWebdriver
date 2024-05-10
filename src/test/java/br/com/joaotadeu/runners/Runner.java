@@ -8,7 +8,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
         features = "src/test/java/br/com/joaotadeu/features/Walkdog.feature",
         glue = "br.com.joaotadeu.steps.steps_walkdogs",
-        plugin = {"pretty", "html: logs/report-html", "json: logs/report.json"},
+        plugin = {"pretty", "html: logs/report-html", "json: logs/report.json","json:target/cucumber.json","junit:target/cucumber.xml"},
         tags = "@walkdog"
 )
 public class Runner {
